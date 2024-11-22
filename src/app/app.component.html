@@ -1,0 +1,14 @@
+<header class="navbar">
+  <div class="navbar-left">
+    <h1>Sistema de recursos comunitarios</h1>
+    <p>CommunityGest</p>
+  </div>
+  <nav class="navbar-right">
+    <ul>
+      <button mat-button routerLink="/inicio" routerLinkActive="active" [disabled]="isHomeActive()">Inicio</button>
+      <button mat-button routerLink="/que-es-este-sistema" routerLinkActive="active">¿Qué es este sistema?</button>
+      <button mat-button routerLink="/sobre-nosotros" routerLinkActive="active">Sobre nosotros</button>
+    </ul>
+  </nav>
+</header>
+<router-outlet></router-outlet>

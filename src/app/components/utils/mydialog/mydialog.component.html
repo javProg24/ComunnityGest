@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>
+    {{data.nombre+' '+data.apellido}}
+    <button mat-icon-button (click)="onCerrar()" class="close-button">
+        <mat-icon>close</mat-icon>
+    </button>
+</h2>
+<mat-dialog-content>
+    <p><strong>
+        Link: <a [href]="data.link"target="_blank">GitHub</a>
+    </strong></p>
+    <p><strong>Telf.:</strong> +593{{data.numero}}</p>
+    <p><strong>Rol: </strong>{{data.rol}}</p>
+</mat-dialog-content>

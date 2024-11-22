@@ -1,0 +1,85 @@
+/* Resaltar el botón activo */
+button.router-link-active {
+    font-weight: bold;
+    color: #007bff; /* Cambia el color cuando el botón está activo */
+  }
+  
+  /* Estilo general */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #b2f2bb, #bde0fe);
+    color: #333; /* Color base del texto */
+  }
+  
+  /* Estilo para el encabezado */
+  header.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #076666;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Bloque izquierdo: Título y subtítulo */
+  .navbar-left {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navbar-left h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .navbar-left p {
+    font-size: 16px;
+    margin: 5px 0 0;
+    color: #dad2d2;
+  }
+  
+  /* Bloque derecho: Botones de navegación */
+  .navbar-right {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .navbar-right button {
+    background: none; /* Fondo transparente */
+    border: none; /* Sin borde */
+    color: white; /* Texto blanco */
+    font-size: 16px;
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Animación */
+  }
+  
+  .navbar-right button:hover {
+    background-color: #ffcc00; /* Fondo amarillo al pasar el cursor */
+    color: #333; /* Texto negro al pasar el cursor */
+  }
+  
+  /* Botón deshabilitado (cuando estamos en la página Home) */
+  button:disabled {
+    background-color: #bbb; /* Fondo gris cuando está deshabilitado */
+    color: #ccc; /* Texto gris cuando está deshabilitado */
+    cursor: not-allowed; /* Cursor de no permitido */
+  }
+  
+  /* Ajuste responsivo */
+  @media (max-width: 768px) {
+    header.navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navbar-right {
+      margin-top: 10px;
+      justify-content: flex-start;
+    }
+  }

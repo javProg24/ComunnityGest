@@ -1,0 +1,26 @@
+<h1>{{title}}</h1>
+<main class="main-content">
+    <div *ngIf="perfiles.length===0">
+        <p>No hay contactos</p>
+    </div>
+    <div *ngIf="perfiles.length>0" class="grid-container">
+        <div *ngFor="let perfil of perfiles;let indice = index" class="grid-item">
+            <mat-card appearance="raised" class="contact-card" >
+                <mat-card-header>
+                    <mat-card-title>
+                        <strong>{{perfil.nombre+' '+perfil.apellido|uppercase}}</strong>
+                    </mat-card-title>
+                </mat-card-header>
+                <img mat-card-image 
+                [src]="perfil.foto ? perfil.foto : '/public/image/default.png'" 
+                [alt]="perfil.nombre + ' ' + perfil.apellido">
+                <mat-card-actions class="center-actions">
+                    <button mat-flat-button class="btnVer" (click)="verPerfil(perfil)">
+                        <mat-icon>visibility</mat-icon>
+                        Ver contacto
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,72 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+    gap: 20px; /* Espaciado entre elementos */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    max-width: 1200px; /* Define un ancho máximo para diseño responsivo */
+    margin: 0 auto; /* Centra el contenedor */
+}
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contact-card {
+    width: 100%;
+    max-width: 300px; /* Controla el tamaño máximo de cada tarjeta */
+    text-align: center;
+}
+.contact-card img{
+    margin: 15px;
+    border-radius: 10px;
+}
+.center-actions {
+    display: flex;
+    justify-content: center; 
+    align-items: center; /* Centra verticalmente si hay más contenido */
+}
+h1{
+    color: rgb(5, 167, 102);
+    padding: 20px;
+    text-align: center;
+}
+mat-card-title{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+.btnVer{
+    background-color: #4CAF50;
+    color: white;
+}
+.btnVer:hover {
+    background-color: #54d096;
+    color: white;
+}
+/* .contact-card{
+    text-align: center;
+    display: inline-block;
+    margin: 5px;
+    background-color: #ffffff;
+    border: 1px solid gray;
+    border-radius: 1rem;
+}
+.contact-card img{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10%;
+    width: 185px;
+    height: 200px;
+}
+h2{
+    color: rgb(5, 167, 102);
+    padding: 20px;
+}
+mat-card-title{
+    font-family: Arial, Helvetica, sans-serif;
+} */

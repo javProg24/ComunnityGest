@@ -1,0 +1,17 @@
+<!-- <p>inicio-servicios works!</p> -->
+<main class="main-content">
+    <section class="bienvenida">
+        <img src="CommunityGest.png" alt="CommunityGest">
+        <h2>¡Bienvenido!</h2>
+        <p>Este es un sistema que permite a una comunidad o barrio gestionar
+            recursos compartidos
+        </p>
+    </section>
+    <section class="cards">
+        <mat-card *ngFor="let item of menuItems" class="card">
+            <img mat-card-image [src]="item.icon" alt="Icono" width="100px">
+            <h3>{{item.title}}</h3>
+            <button mat-raised-button [routerLink]="item.routerLink" routerLinkActive="active">{{ item.buttonText }}</button>
+        </mat-card>
+    </section>
+</main>

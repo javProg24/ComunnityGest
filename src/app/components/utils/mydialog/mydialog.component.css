@@ -1,0 +1,8 @@
+.close-button {
+    position: absolute;
+    top: 8px; /* Ajusta según sea necesario */
+    right: 8px; /* Ajusta según sea necesario */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}

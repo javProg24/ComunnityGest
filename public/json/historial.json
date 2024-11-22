@@ -1,0 +1,15 @@
+{
+    "uso":[
+        {
+            "id": 1,
+            "usuario":"name",
+            "recuros":"",
+            "fecha": "2020-01-01",
+            "hora inicio": "10:09",
+            "hora fin": "10:10"
+        },
+        {
+
+        }
+    ]
+}

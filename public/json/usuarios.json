@@ -1,0 +1,28 @@
+{
+  "usuarios":[
+    {
+      "id": 1,
+      "nombre": "Juan Pérez",
+      "correo": "juan.perez@example.com",
+      "direccion": "Calle Falsa 123",
+      "telefono": "0987654321",
+      "activo": true
+    },
+    {
+      "id": 2,
+      "nombre": "María Gómez",
+      "correo": "maria.gomez@example.com",
+      "direccion": "Avenida Siempre Viva 456",
+      "telefono": "0998765432",
+      "activo": false
+    },
+    {
+      "id": 3,
+      "nombre": "Gumbal Watreson",
+      "correo": "maria.gomez@example.com",
+      "direccion": "Avenida Siempre Viva 456",
+      "telefono": "0998765432",
+      "activo": false
+    }
+  ]
+}
