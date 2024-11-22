@@ -1,0 +1,51 @@
+<h2 mat-dialog-title class="dialog-title">
+    {{ data ? 'Editar Usuario' : 'Crear Usuario' }}
+</h2>
+<mat-dialog-content>
+    <!-- Formulario con referencia local -->
+    <form (ngSubmit)="guardar()" #usuarioForm="ngForm">
+        <!-- Campo Nombre -->
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Ingresa nombre del usuario</mat-label>
+        <input matInput [(ngModel)]="usuario.nombre" name="nombre" #nombre="ngModel" required minlength="3"/>
+        <mat-error *ngIf="nombre.invalid && nombre.touched">
+            El nombre es obligatorio y debe tener al menos 3 caracteres.
+        </mat-error>
+    </mat-form-field>
+    <!-- Campo Correo -->
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Ingresa correo</mat-label>
+        <input matInput [(ngModel)]="usuario.correo" name="correo" #correo="ngModel" required email />
+        <mat-error *ngIf="correo.invalid && correo.touched">
+            El correo es obligatorio y debe ser válido.
+        </mat-error>
+    </mat-form-field>
+    <!-- Campo Dirección -->
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Ingresa dirección</mat-label>
+        <input matInput [(ngModel)]="usuario.direccion" name="direccion" />
+    </mat-form-field>
+  
+    <!-- Campo Teléfono -->
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Ingresa teléfono</mat-label>
+        <input matInput [(ngModel)]="usuario.telefono" name="telefono" />
+    </mat-form-field>
+  
+    <!-- Radio Buttons para el estado -->
+    <div class="full-width">
+        <mat-label>Selecciona estado: </mat-label>
+        <mat-radio-group [(ngModel)]="usuario.activo" name="activo">
+            <mat-radio-button [value]="true">Activado</mat-radio-button>
+            <mat-radio-button [value]="false">Desactivado</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <!-- Botón Guardar deshabilitado si el formulario es inválido -->
+    <button mat-raised-button color="primary" (click)="guardar()" [disabled]="usuarioForm.invalid">Guardar</button>
+</mat-dialog-actions>

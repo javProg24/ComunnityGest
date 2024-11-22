@@ -1,0 +1,75 @@
+/* Estilos para la tarjeta (mat-card) */
+mat-card {
+    padding: 16px; /* Espaciado dentro de la tarjeta para no pegarse a las esquinas */
+    margin: 16px; /* Espaciado fuera de la tarjeta para que no toque los bordes del contenedor */
+    border-radius: 8px; /* Esquinas redondeadas para un aspecto más moderno */
+  }
+  
+  /* Estilo para el título de la tarjeta */
+  mat-card-title {
+    margin-bottom: 20px; /* Separa el título del contenido de la tarjeta */
+    font-size: 1.5rem; /* Tamaño de fuente más grande para el título */
+    font-weight: 600; /* Pone el título en negrita */
+    padding-left: 8px; /* Asegura que el título no toque el borde izquierdo */
+  }
+  
+  /* Contenedor para la búsqueda y el botón de agregar usuario */
+  .actions-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px; /* Separación entre los elementos */
+    margin-bottom: 20px; /* Separación de los elementos de la tabla */
+    flex-wrap: wrap; /* Asegura que los elementos se envuelvan en pantallas pequeñas */
+  }
+  
+  /* Estilos para la búsqueda */
+  .search-field {
+    flex: 1;
+    max-width: 400px; /* Limita el tamaño máximo del campo de búsqueda */
+    min-width: 200px; /* Asegura que no se haga más pequeño que esto */
+  }
+  
+  /* Estilo para el botón de agregar usuario */
+  button.mat-raised-button {
+    min-width: 150px; /* Asegura que el botón tenga un tamaño mínimo adecuado */
+  }
+  
+  /* Estilos adicionales para los botones en pantallas pequeñas */
+  @media (max-width: 600px) {
+    .actions-container {
+      flex-direction: column;
+      gap: 12px; /* Menos espacio en pantallas pequeñas */
+      align-items: flex-start;
+    }
+  
+    .search-field {
+      max-width: 100%; /* El campo de búsqueda se expande en pantallas pequeñas */
+    }
+  
+    button.mat-raised-button {
+      width: 100%; /* El botón de agregar usuario ocupa todo el ancho */
+    }
+  }
+  
+  /* Contenedor de botones para acciones */
+  .acciones-buttons-container {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  /* Estilo para los tooltips */
+  ::ng-deep .mat-tooltip {
+    background-color: rgba(0, 0, 0, 0.87);
+    color: white;
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+  
+  /* Añadir transición suave en los botones al hacer hover */
+  button.mat-icon-button:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+  }
+  

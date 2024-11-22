@@ -10,12 +10,12 @@ export interface DialogPerfil{
   rol:string
 }
 @Component({
-  selector: 'app-mydialog',
+  selector: 'app-my-dialog',
   imports: [MatButtonModule,MatIconModule,MatDialogModule],
-  templateUrl: './mydialog.component.html',
-  styleUrl: './mydialog.component.css'
+  templateUrl: './my-dialog.component.html',
+  styleUrl: './my-dialog.component.css'
 })
-export class MydialogComponent {
+export class MyDialogComponent {
   constructor(public dialogRef:MatDialogRef<MatDialogModule>,
     @Inject(MAT_DIALOG_DATA) public data:DialogPerfil){}
     onCerrar():void{
