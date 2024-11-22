@@ -1,0 +1,7 @@
+http://localhost:3000/usuario
+http://localhost:3000/uso
+http://localhost:3000/reporte
+http://localhost:3000/reserva
+http://localhost:3000/herramienta
+http://localhost:3000/instalacion
+http://localhost:3000/integrante
