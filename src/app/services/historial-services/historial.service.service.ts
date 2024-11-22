@@ -15,6 +15,7 @@ export class HistorialServiceService {
   addRecurso(recurso:Recurso):Observable<Recurso>{
     return this.http.post<Recurso>(this.jsonUrl,recurso);
   }
+  // eliminar
   deleteRecurso(recurso:Recurso):Observable<void>{
     const urlRecurso=`${this.jsonUrl}/${recurso.id}`;
     return this.http.delete<void>(urlRecurso);
