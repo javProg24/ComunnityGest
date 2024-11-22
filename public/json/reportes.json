@@ -1,5 +1,21 @@
 {
     "reportes":[
         
+        {
+          "id": "1",
+          "titulo": "Fuga de agua en la calle principal",
+          "descripcion": "Hay una fuga de agua cerca del mercado central.",
+          "recursoAfectado": "Agua",
+          "estado": "pendiente"
+        },
+        {
+          "id": "2",
+          "titulo": "Árbol caído en el parque",
+          "descripcion": "Un árbol cayó bloqueando la entrada al parque.",
+          "recursoAfectado": "Árbol",
+          "estado": "en proceso"
+        }
+      
+        
     ]
 }
