@@ -7,7 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { MydialogComponent } from '../utils/mydialog/mydialog.component';
+import { MyDialogComponent } from '../shared/my-dialog/my-dialog.component';
 @Component({
   selector: 'app-sobre-nosotros',
   imports: [NgIf,NgFor,MatCardModule,UpperCasePipe,MatIconModule,MatButtonModule],
@@ -30,7 +30,7 @@ export class SobreNosotrosComponent implements OnInit{
     })
   }
   verPerfil(perfil: Integrante):void{
-    const dialogRef = this.myDialog.open(MydialogComponent,{
+    const dialogRef = this.myDialog.open(MyDialogComponent,{
       width: '350px',
       height: '',
       data:{

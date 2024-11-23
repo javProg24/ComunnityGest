@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 export interface DialogPerfil{
   nombre: string,
   apellido: string,
@@ -10,12 +10,12 @@ export interface DialogPerfil{
   rol:string
 }
 @Component({
-  selector: 'app-mydialog',
+  selector: 'app-my-dialog',
   imports: [MatButtonModule,MatIconModule,MatDialogModule],
-  templateUrl: './mydialog.component.html',
-  styleUrl: './mydialog.component.css'
+  templateUrl: './my-dialog.component.html',
+  styleUrl: './my-dialog.component.css'
 })
-export class MydialogComponent {
+export class MyDialogComponent {
   constructor(public dialogRef:MatDialogRef<MatDialogModule>,
     @Inject(MAT_DIALOG_DATA) public data:DialogPerfil){}
     onCerrar():void{
