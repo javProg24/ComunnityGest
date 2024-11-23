@@ -1,42 +1,87 @@
+/* Contenedor principal */
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 16px;
-  }
-  
-  .form-section,
-  .table-section {
-    flex: 1 1 calc(50% - 16px); 
-  }
-  
-  .full-width {
-    width: 100%;
-  }
-  
-  .checkbox-container {
-    display: flex;
-    align-items: center;
-    margin-top: 8px;
-    margin-bottom: 16px;
-    gap: 8px;
-  }
-  
-  .activo {
-    color: green;
-    font-weight: bold;
-  }
-  
-  .inactivo {
-    color: red;
-    font-weight: bold;
-  }
-  
-  .search-container {
-    margin-bottom: 16px;
-  }
-  
-  .full-width {
-    width: 100%;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 16px;
+}
+.form-section mat-card {
+  padding: 15px; 
+}
+
+/* Sección del formulario */
+.form-section {
+  flex: 1 1 calc(50% - 24px); 
+}
+
+.full-width {
+  width: 100%;
+}
+/*Contenedores*/
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  gap: 8px;
+  padding-left: 8px; 
+}
+
+/*Boton Agregar*/
+button[type="submit"] {
+  margin-top: 16px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  display: block;
+  margin-left: auto;
+}
+
+
+/* Sección de búsqueda */
+.search-container {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Tabla de usuarios */
+.table-section {
+  flex: 1 1 100%; 
+}
+
+.mat-elevation-z8 {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mat-header-row,
+.mat-row {
+  display: flex;
+  align-items: center;
+}
+
+.mat-header-cell,
+.mat-cell {
+  padding: 8px 16px;
+  text-align: left;
+}
+
+/* Estilos para columnas específicas */
+.activo {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.inactivo {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* Botones de acciones */
+button.mat-icon-button {
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mat-icon {
+  font-size: 20px;
+}

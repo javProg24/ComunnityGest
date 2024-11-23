@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class NotificationsComponent {
   @Input() message: string = '';
-  @Input() type: 'success' | 'error' | 'info' = 'info';
+  @Input() type: 'success' | 'error' | 'info' | 'warning' = 'info'; // Agregar 'warning'
 }

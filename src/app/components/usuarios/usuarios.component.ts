@@ -25,7 +25,6 @@ import { NotificationsComponent } from '../shared/notifications/notifications.co
     MatError,
     MatLabel,
     MatCheckbox,
-    MatDivider,
     MatTable,
     MatHeaderCell,
     MatCell,
@@ -53,8 +52,8 @@ export class UsuariosComponent implements OnInit {
   usuarioForm!: FormGroup;
   editMode = false;
   usuarioSeleccionado!: Usuario;
-
-  notification: { message: string; type: 'info' | 'success' | 'error' } = {
+  //Para las notifcaciones 
+  notification: { message: string; type: 'info' | 'success' | 'error' | 'warning'  } = {
     message: '',
     type: 'info'
   };
@@ -62,18 +61,24 @@ export class UsuariosComponent implements OnInit {
   displayedColumns = ['id', 'nombre', 'correo', 'telefono', 'activo', 'acciones'];
 
   constructor(private fb: FormBuilder, private usuariosService: UsuariosService, private dialog: MatDialog) {}
-
+  //Validacion y manejo de errores al agregar datos
   ngOnInit(): void {
     this.usuarioForm = this.fb.group({
-      nombre: ['', Validators.required],
+      nombre: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)] // Solo letras y espacios
+      ],
       correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', Validators.required],
+      telefono: [
+        '',
+        [Validators.required, Validators.pattern(/^\d{10}$/)] // Exactamente 10 dígitos
+      ],
       activo: [true]
     });
-
+  
     this.cargarUsuarios();
   }
-
+ //CargarUusarios
   cargarUsuarios(): void {
     this.usuariosService.getUsuarios().subscribe({
       next: (data) => {
@@ -84,6 +89,7 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
+  //Para la busqueda
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
     this.filteredUsuarios = this.usuarios.filter(usuario =>
@@ -92,16 +98,25 @@ export class UsuariosComponent implements OnInit {
       usuario.telefono.toLowerCase().includes(filterValue)
     );
   }
-
+  //Editar usuario
   editUsuario(usuario: Usuario): void {
     this.usuarioSeleccionado = usuario;
     this.usuarioForm.patchValue(usuario);
     this.editMode = true;
   }
 
+  //Notificaciones muestra feedback al usuario sobre acciones realizadas y validadas
   onSubmit(): void {
-    if (this.usuarioForm.invalid) return;
-
+    if (this.usuarioForm.invalid) {
+      this.notification = { message: 'Por favor llene todos los campos', type: 'warning' };
+  
+      // Desaparicion automática de la notificación
+      setTimeout(() => {
+        this.notification = { message: '', type: 'info' };
+      }, 10000);
+      return;
+    }
+     //Funcion de edicion
     if (this.editMode) {
       this.usuarios = this.usuariosService.updateUsuario(
         this.usuarios,
@@ -113,16 +128,16 @@ export class UsuariosComponent implements OnInit {
       this.usuarios = this.usuariosService.addUsuario(this.usuarios, this.usuarioForm.value);
       this.notification = { message: 'Usuario agregado exitosamente', type: 'success' };
     }
-
+  
     this.usuarioForm.reset({ activo: true });
-    this.actualizarTabla(); // Actualizar tabla inmediatamente
-
-    // Desaparición automática de la notificación
+    this.actualizarTabla();
+  
     setTimeout(() => {
       this.notification = { message: '', type: 'info' };
     }, 2000);
   }
-
+  
+  //Funcion de eliminacion
   deleteUsuario(id: number): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
@@ -144,7 +159,7 @@ export class UsuariosComponent implements OnInit {
       }
     });
   }
-
+  //Para que actualize la tabla al cargar datos
   actualizarTabla(): void {
     this.filteredUsuarios = [...this.usuarios];
   }

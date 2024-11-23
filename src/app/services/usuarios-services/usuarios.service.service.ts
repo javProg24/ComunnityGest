@@ -11,25 +11,26 @@ export class UsuariosService {
 
   constructor(private http: HttpClient) {}
 
+  //CRUD usuarios
   // Obtener todos los usuarios
   getUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.apiUrl);
   }
 
-  // Simular creación de un usuario
+  // Creacion de un usuario
   addUsuario(usuarios: Usuario[], nuevoUsuario: Usuario): Usuario[] {
     nuevoUsuario.id = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) + 1 : 1;
     return [...usuarios, nuevoUsuario];
   }
 
-  // Simular actualización de un usuario
+  // Actualización de un usuario
   updateUsuario(usuarios: Usuario[], usuarioEditado: Usuario): Usuario[] {
     return usuarios.map(usuario =>
       usuario.id === usuarioEditado.id ? { ...usuario, ...usuarioEditado } : usuario
     );
   }
 
-  // Simular eliminación de un usuario
+  // Eliminación de un usuario
   deleteUsuario(usuarios: Usuario[], id: number): Usuario[] {
     return usuarios.filter(usuario => usuario.id !== id);
   }  

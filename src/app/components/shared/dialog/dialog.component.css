@@ -1,0 +1,35 @@
+/* Título */
+mat-dialog-title {
+    font-size: 1.5rem; 
+    font-weight: 600;  
+    color: #3f51b5;    
+    margin-bottom: 12px; 
+  }
+  
+  /* Contenido del diálogo */
+  mat-dialog-content {
+    font-size: 1rem;     
+    color: #333;          
+    margin-bottom: 24px;  
+    line-height: 1.5;    
+  }
+  
+  /* Botones */
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 12px;                 
+  }
+  
+  mat-dialog-actions button {
+    font-size: 1rem;           
+    padding: 10px 20px;       
+    border-radius: 4px;       
+  }
+  
+  mat-dialog-actions button.mat-button {
+    background-color: transparent; 
+    color: #1976d2; 
+    border: 1px solid #1976d2; 
+  }
+  

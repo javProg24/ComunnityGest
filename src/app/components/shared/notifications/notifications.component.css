@@ -1,20 +1,23 @@
 .notification {
-    padding: 16px;
-    margin: 8px 0;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-  
-    &.success {
-      background-color: #4caf50;
-    }
-  
-    &.error {
-      background-color: #f44336;
-    }
-  
-    &.info {
-      background-color: #2196f3;
-    }
+  padding: 16px;
+  margin: 8px 0;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+
+  &.success {
+    background-color: #4caf50;
   }
-  
+
+  &.error {
+    background-color: #f44336;
+  }
+
+  &.info {
+    background-color: #2196f3;
+  }
+
+  &.warning {
+    background-color: #ff9800; 
+  }
+}
