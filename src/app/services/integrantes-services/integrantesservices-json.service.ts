@@ -7,7 +7,7 @@ import { Integrante } from '../../models/integrante';
   providedIn: 'root'
 })
 export class IntegrantesservicesJsonService {
-  private jsonUrl = "http://localhost:3000/integrantes";
+  private jsonUrl = "http://localhost:3000/integrante";
   constructor(private http:HttpClient) { }
   getIntegrantes():Observable<Integrante[]>{
     return this.http.get<Integrante[]>(this.jsonUrl);

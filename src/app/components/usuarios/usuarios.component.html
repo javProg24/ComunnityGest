@@ -1,1 +1,127 @@
-<p>hola</p>
+<!--Shared Componten compartido -notificactions-->
+<app-notifications
+  *ngIf="notification.message"
+  [message]="notification.message"
+  [type]="notification.type"
+></app-notifications>
+
+<div class="container">
+  <!-- Formulario de Usuario -->
+  <div class="form-section">
+ <mat-card>
+  <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <!-- Campo de Nombre -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="usuarioForm.get('nombre')?.hasError('required')">
+        El nombre es obligatorio
+      </mat-error>
+      <mat-error *ngIf="usuarioForm.get('nombre')?.hasError('pattern')">
+        Carácter no válido. Solo se permiten letras
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo de Correo -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Correo</mat-label>
+      <input matInput type="email" formControlName="correo" />
+      <mat-error *ngIf="usuarioForm.get('correo')?.hasError('required')">
+        El correo es obligatorio
+      </mat-error>
+      <mat-error *ngIf="usuarioForm.get('correo')?.hasError('email')">
+        Correo no válido
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo de Teléfono -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Teléfono</mat-label>
+      <input matInput type="text" formControlName="telefono" />
+      <mat-error *ngIf="usuarioForm.get('telefono')?.hasError('required')">
+        El teléfono es obligatorio
+      </mat-error>
+      <mat-error *ngIf="usuarioForm.get('telefono')?.hasError('pattern')">
+        Carácter no válido. Solo se permiten números de 10 dígitos
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo de Cuenta Activa -->
+    <div class="checkbox-container">
+      <span>¿Este usuario tiene su cuenta activa?</span>
+      <mat-checkbox formControlName="activo"></mat-checkbox>
+    </div>
+
+    <!-- Botón de Agregar/Actualizar -->
+    <button mat-raised-button color="primary" type="submit">
+      {{ editMode ? 'Actualizar' : 'Agregar' }}
+    </button>
+  </form>
+</mat-card>
+
+  </div>
+
+  <!-- Sección Vista de Tabla para listar y buscar los registros existentes-->
+  <div class="table-section">
+    <div class="search-container">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por nombre, correo o teléfono" />
+      </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="filteredUsuarios" class="mat-elevation-z8">
+      <!-- Columna de ID -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{ usuario.id }} </mat-cell>
+      </ng-container>
+
+      <!-- Columna de Nombre -->
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{ usuario.nombre }} </mat-cell>
+      </ng-container>
+
+      <!-- Columna de Correo -->
+      <ng-container matColumnDef="correo">
+        <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{ usuario.correo }} </mat-cell>
+      </ng-container>
+
+      <!-- Columna de Teléfono -->
+      <ng-container matColumnDef="telefono">
+        <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{ usuario.telefono }} </mat-cell>
+      </ng-container>
+
+      <!-- Columna de Activo -->
+      <ng-container matColumnDef="activo">
+        <mat-header-cell *matHeaderCellDef> Cuenta Activa </mat-header-cell>
+        <mat-cell *matCellDef="let usuario">
+          <span [ngClass]="{ 'activo': usuario.activo, 'inactivo': !usuario.activo }">
+            {{ usuario.activo ? 'Sí' : 'No' }}
+          </span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Columna de Acciones - Funciones de edición y eliminación -->
+       <!--Tambien se implementa el componente compartido Dialog, para confirmar la eliminacion de un registro-->
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let usuario">
+          <button mat-icon-button (click)="editUsuario(usuario)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteUsuario(usuario.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Cabecera de la Tabla -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>
