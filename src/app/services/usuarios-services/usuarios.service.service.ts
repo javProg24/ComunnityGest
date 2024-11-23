@@ -7,24 +7,30 @@ import { Usuario } from '../../models/usuarios.model';
   providedIn: 'root'
 })
 export class UsuariosServiceService {
-  // private url = '/json/usuarios.json';
-  private url = 'http://localhost:3000/usuario'
+  private apiUrl = 'http://localhost:3000/usuario';
+
   constructor(private http: HttpClient) {}
+
+  // Obtener todos los usuarios
   getUsuarios(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.url);
+    return this.http.get<Usuario[]>(this.apiUrl);
   }
-  
-  agregarUsuario(usuario: Usuario): Observable<Usuario> {
-    usuario.id = Date.now(); // Generar ID único
-    return of(usuario); // Retornar usuario creado
+
+  // Simular creación de un usuario
+  addUsuario(usuarios: Usuario[], nuevoUsuario: Usuario): Usuario[] {
+    nuevoUsuario.id = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) + 1 : 1;
+    return [...usuarios, nuevoUsuario];
   }
-  
-  actualizarUsuario(usuario: Usuario): Observable<Usuario> {
-    return of(usuario); // Simular actualización del usuario
+
+  // Simular actualización de un usuario
+  updateUsuario(usuarios: Usuario[], usuarioEditado: Usuario): Usuario[] {
+    return usuarios.map(usuario =>
+      usuario.id === usuarioEditado.id ? { ...usuario, ...usuarioEditado } : usuario
+    );
   }
-  
-  // Eliminar un usuario (simulado)
-  eliminarUsuario(id: number): Observable<number> {
-    return of(id);
+
+  // Simular eliminación de un usuario
+  deleteUsuario(usuarios: Usuario[], id: number): Usuario[] {
+    return usuarios.filter(usuario => usuario.id !== id);
   }
 }
