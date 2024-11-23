@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .form-section,
+  .table-section {
+    flex: 1 1 calc(50% - 16px); 
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    gap: 8px;
+  }
+  
+  .activo {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .inactivo {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .search-container {
+    margin-bottom: 16px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
