@@ -37,7 +37,33 @@
           }
     ],
     "uso":[
-
+      {
+        "id": "1",
+        "usuario": "Holger Gonzalez",
+        "tipo": "Instalacion",
+        "recursos": "Cancha de fútbol",
+        "fecha": "2021-01-01",
+        "horaInicio": "10:00:00",
+        "horaFin": "18:00:00"
+        },
+        {
+        "id": "2",
+        "usuario": "Luis Enrique Sánchez",
+        "tipo": "Instalacion",
+        "recursos": "Cancha de fútbol",
+        "fecha": "2021-01-01",
+        "horaInicio": "10:00:00",
+        "horaFin": "18:00:00"
+        },
+        {
+        "id": "3",
+        "usuario": "Veronica Delgado",
+        "tipo": "Instalacion",
+        "recursos": "Cancha de fútbol",
+        "fecha": "2021-01-01",
+        "horaInicio": "10:00:00",
+        "horaFin": "18:00:00"
+        }
     ],
     "reporte":[
 

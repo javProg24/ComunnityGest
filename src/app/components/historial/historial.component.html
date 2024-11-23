@@ -1,1 +1,36 @@
-<p>historial works!</p>
+<p>recursos works!</p>
+<table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let recurso"> {{recurso.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="usuario">
+        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+        <td mat-cell *matCellDef="let recurso"> {{recurso.usuario}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+        <td mat-cell *matCellDef="let recurso"> {{recurso.tipo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="recursos">
+        <th mat-header-cell *matHeaderCellDef> Recursos </th>
+        <td mat-cell *matCellDef="let recurso"> {{recurso.recursos}} </td>
+    </ng-container>
+    <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td mat-cell *matCellDef="let recurso"> {{recurso.fecha}} </td>
+    </ng-container>
+    <ng-container matColumnDef="horaInicio">
+        <th mat-header-cell *matHeaderCellDef> Hora Inicio </th>
+        <td mat-cell *matCellDef="let recurso"> {{recurso.horaInicio}} </td>
+    </ng-container>
+    <ng-container matColumnDef="horaFin">
+        <th mat-header-cell *matHeaderCellDef> Hora Fin </th>
+        <td mat-cell *matCellDef="let recurso"> {{recurso.horaFin}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['id','usuario','tipo','recursos','fecha','horaInicio','horaFin']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['id','usuario','tipo','recursos','fecha','horaInicio','horaFin'];"></tr>
+</table>
+<mat-paginator [length]="200" [pageSizeOptions]="[10, 7, 20]" aria-label="Select page" showFirstLastButtons>
+</mat-paginator>
