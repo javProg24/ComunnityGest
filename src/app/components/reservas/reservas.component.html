@@ -1,1 +1,112 @@
-<p>reservas works!</p>
+<form [formGroup]="reservasForm" (ngSubmit)="modoEdicion ? actualizarReserva() : crearReserva()">
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>ID Usuario</mat-label>
+        <input matInput formControlName="usuarioId" type="string">
+        <mat-error *ngIf="reservasForm.get('usuarioId')?.hasError('required')">
+          El ID de usuario es requerido
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>ID Recurso</mat-label>
+        <input matInput formControlName="recursoId" type="number">
+        <mat-error *ngIf="reservasForm.get('recursoId')?.hasError('required')">
+          El ID del recurso es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+  
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput formControlName="fechaInicio" type="datetime-local">
+        <mat-error *ngIf="reservasForm.get('fechaInicio')?.hasError('required')">
+          La fecha de inicio es requerida
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput formControlName="fechaFin" type="datetime-local">
+        <mat-error *ngIf="reservasForm.get('fechaFin')?.hasError('required')">
+          La fecha de fin es requerida
+        </mat-error>
+      </mat-form-field>
+    </div>
+  
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Estado</mat-label>
+      <select matNativeControl formControlName="estado">
+        <option *ngFor="let estado of estadosReserva" [value]="estado.valor">
+          {{estado.texto}}
+        </option>
+      </select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion" rows="3"></textarea>
+    </mat-form-field>
+  
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!reservasForm.valid">
+        {{ modoEdicion ? 'Actualizar' : 'Crear' }}
+      </button>
+      <button mat-button type="button" *ngIf="modoEdicion" (click)="cancelarEdicion()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+  
+  <div class="table-container">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Filtrar reservas</mat-label>
+      <input matInput formControlName="filtro" placeholder="Buscar por usuario, recurso o estado">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  
+    <table mat-table [dataSource]="buscarReservas()" class="mat-elevation-z8">
+      <ng-container matColumnDef="usuarioId">
+        <th mat-header-cell *matHeaderCellDef>Usuario ID</th>
+        <td mat-cell *matCellDef="let reserva">{{reserva.usuarioId}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="recursoId">
+        <th mat-header-cell *matHeaderCellDef>Recurso ID</th>
+        <td mat-cell *matCellDef="let reserva">{{reserva.recursoId}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="fechaInicio">
+        <th mat-header-cell *matHeaderCellDef>Fecha Inicio</th>
+        <td mat-cell *matCellDef="let reserva">{{reserva.fechaInicio | date:'short'}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="fechaFin">
+        <th mat-header-cell *matHeaderCellDef>Fecha Fin</th>
+        <td mat-cell *matCellDef="let reserva">{{reserva.fechaFin | date:'short'}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let reserva">{{reserva.estado}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let reserva">
+          <button mat-icon-button color="primary" (click)="editarReserva(reserva)" 
+                  matTooltip="Editar reserva">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminarReserva(reserva.id)"
+                  matTooltip="Eliminar reserva">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+    </table>
+  </div>

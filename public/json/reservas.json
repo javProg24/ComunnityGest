@@ -1,3 +1,22 @@
 {
-    "reservas":[]
-}
+    "reservas": [
+      {
+        "id": 1,
+        "usuarioId": "Juan Pérez",
+        "recursoId": 201,
+        "fechaInicio": "2024-06-15T10:00:00",
+        "fechaFin": "2024-06-15T12:00:00",
+        "estado": "PENDIENTE",
+        "descripcion": "Reserva de salón comunal para reunión"
+      },
+      {
+        "id": 2,
+        "usuarioId": "María Gómez",
+        "recursoId": 202,
+        "fechaInicio": "2024-06-20T14:00:00",
+        "fechaFin": "2024-06-20T16:00:00", 
+        "estado": "CONFIRMADA",
+        "descripcion": "Uso de herramientas de jardinería"
+      }
+    ]
+  }
