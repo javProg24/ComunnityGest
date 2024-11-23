@@ -8,7 +8,7 @@ import { Reporte } from '../../models/reportes.model';
 })
 export class ReportesServiceService {
 
-  private jsonUrl="../json/reportes.json"
+  private jsonUrl="http://localhost:3000/reportes"
   constructor( private http:HttpClient) { 
   }
 

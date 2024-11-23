@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Reporte } from '../../models/reportes.model';
 import { ReportesServiceService } from '../../services/reportes-services/reportes.service.service';
+import { MatCardContent } from '@angular/material/card';
 
 @Component({
   selector: 'app-reportes',
@@ -21,6 +22,7 @@ export class ReportesComponent {
   getReportes(): void{
     this.miServicioRep.getReportes().subscribe((data : Reporte[])=>{
       this.reportes = data;
+      console.log(this.reportes[0])
     });
   }
 }
