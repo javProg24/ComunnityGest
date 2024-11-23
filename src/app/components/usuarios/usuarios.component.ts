@@ -11,6 +11,11 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../shared/dialog/dialog.component';
+import { NotificationsComponent } from '../shared/notifications/notifications.component';
+
+
 
 @Component({
   selector: 'app-usuarios',
@@ -29,7 +34,6 @@ import { CommonModule } from '@angular/common';
     MatHeaderRow,
     ReactiveFormsModule,
     CommonModule,
-    ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -37,20 +41,27 @@ import { CommonModule } from '@angular/common';
     MatCheckboxModule,
     MatTableModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    NotificationsComponent
   ],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent implements OnInit {
   usuarios: Usuario[] = [];
+  filteredUsuarios: Usuario[] = [];
   usuarioForm!: FormGroup;
   editMode = false;
   usuarioSeleccionado!: Usuario;
 
+  notification: { message: string; type: 'info' | 'success' | 'error' } = {
+    message: '',
+    type: 'info'
+  };
+
   displayedColumns = ['id', 'nombre', 'correo', 'telefono', 'activo', 'acciones'];
 
-  constructor(private fb: FormBuilder, private usuariosService: UsuariosService) {}
+  constructor(private fb: FormBuilder, private usuariosService: UsuariosService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.usuarioForm = this.fb.group({
@@ -62,7 +73,7 @@ export class UsuariosComponent implements OnInit {
 
     this.cargarUsuarios();
   }
-  filteredUsuarios: Usuario[] = [];
+
   cargarUsuarios(): void {
     this.usuariosService.getUsuarios().subscribe({
       next: (data) => {
@@ -72,6 +83,7 @@ export class UsuariosComponent implements OnInit {
       error: () => alert('Error cargando datos')
     });
   }
+
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
     this.filteredUsuarios = this.usuarios.filter(usuario =>
@@ -80,7 +92,12 @@ export class UsuariosComponent implements OnInit {
       usuario.telefono.toLowerCase().includes(filterValue)
     );
   }
-  
+
+  editUsuario(usuario: Usuario): void {
+    this.usuarioSeleccionado = usuario;
+    this.usuarioForm.patchValue(usuario);
+    this.editMode = true;
+  }
 
   onSubmit(): void {
     if (this.usuarioForm.invalid) return;
@@ -90,21 +107,45 @@ export class UsuariosComponent implements OnInit {
         this.usuarios,
         { ...this.usuarioSeleccionado, ...this.usuarioForm.value }
       );
+      this.notification = { message: 'Usuario actualizado exitosamente', type: 'success' };
       this.editMode = false;
     } else {
       this.usuarios = this.usuariosService.addUsuario(this.usuarios, this.usuarioForm.value);
+      this.notification = { message: 'Usuario agregado exitosamente', type: 'success' };
     }
 
     this.usuarioForm.reset({ activo: true });
-  }
+    this.actualizarTabla(); // Actualizar tabla inmediatamente
 
-  editUsuario(usuario: Usuario): void {
-    this.usuarioSeleccionado = usuario;
-    this.usuarioForm.patchValue(usuario);
-    this.editMode = true;
+    // Desaparición automática de la notificación
+    setTimeout(() => {
+      this.notification = { message: '', type: 'info' };
+    }, 2000);
   }
 
   deleteUsuario(id: number): void {
-    this.usuarios = this.usuariosService.deleteUsuario(this.usuarios, id);
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        titulo: 'Confirmar Eliminación',
+        mensaje: '¿Está seguro de que desea eliminar este usuario?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.usuarios = this.usuariosService.deleteUsuario(this.usuarios, id);
+        this.actualizarTabla(); // Actualizar tabla inmediatamente
+        this.notification = { message: 'Usuario eliminado exitosamente', type: 'error' };
+
+        // Desaparición automática de la notificación
+        setTimeout(() => {
+          this.notification = { message: '', type: 'info' };
+        }, 2000);
+      }
+    });
+  }
+
+  actualizarTabla(): void {
+    this.filteredUsuarios = [...this.usuarios];
   }
 }

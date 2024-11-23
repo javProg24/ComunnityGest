@@ -32,5 +32,5 @@ export class UsuariosService {
   // Simular eliminación de un usuario
   deleteUsuario(usuarios: Usuario[], id: number): Usuario[] {
     return usuarios.filter(usuario => usuario.id !== id);
-  }
+  }  
 }

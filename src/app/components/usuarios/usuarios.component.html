@@ -1,3 +1,9 @@
+<app-notifications
+  *ngIf="notification.message"
+  [message]="notification.message"
+  [type]="notification.type"
+></app-notifications>
+
 <div class="container">
     <!-- Formulario de Usuario -->
     <div class="form-section">
