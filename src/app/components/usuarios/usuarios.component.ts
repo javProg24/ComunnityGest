@@ -16,78 +16,17 @@ import { UsuariosServiceService } from '../../services/usuarios-services/usuario
 import { UsuarioFormComponent } from '../shared/usuario-form/usuario-form.component';
 @Component({
   selector: 'app-usuarios',
-  imports: [CommonModule,
-    MatDialogModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatCardTitle,
-    MatCardContent,
-    MatCard,
-    FormsModule, MatIcon, MatButtonModule, MatIconModule, MatTooltipModule, MatLabel, MatFormFieldModule,
-    MatInputModule],
+  imports: [],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent {
-  usuarios: Usuario[] = [];
-  columnas: string[] = ['nombre', 'correo', 'direccion', 'telefono', 'activo', 'acciones'];
-  filtro: string = ''; // Declarar la propiedad filtro aquí
-
-  constructor(private usuariosService: UsuariosServiceService, private dialog: MatDialog) {}
+  
+  constructor() {}
 
   ngOnInit(): void {
-    this.cargarUsuarios();
+    
   }
 
-  cargarUsuarios(): void {
-    this.usuariosService.getUsuarios().subscribe((data) => {
-      this.usuarios = data;
-    });
-  }
-
-  agregarUsuario(): void {
-    const dialogRef = this.dialog.open(UsuarioFormComponent);
   
-    dialogRef.afterClosed().subscribe((nuevoUsuario) => {
-      if (nuevoUsuario) {
-        this.usuariosService.agregarUsuario(nuevoUsuario).subscribe((usuario) => {
-          this.usuarios.push(usuario); // Agregar nuevo usuario a la lista
-        });
-      }
-    });
-  }
-  
-  
-  editarUsuario(usuario: Usuario): void {
-    const dialogRef = this.dialog.open(UsuarioFormComponent, {
-      data: usuario, // Pasar usuario seleccionado para editar
-    });
-  
-    dialogRef.afterClosed().subscribe((usuarioEditado) => {
-      if (usuarioEditado) {
-        this.usuariosService.actualizarUsuario(usuarioEditado).subscribe((actualizado) => {
-          const index = this.usuarios.findIndex((u) => u.id === actualizado.id);
-          if (index !== -1) {
-            this.usuarios[index] = actualizado; // Actualizar en la lista
-          }
-        });
-      }
-    });
-  }
-  
-  
-  
-  
-
-  eliminarUsuario(id: number): void {
-    this.usuariosService.eliminarUsuario(id).subscribe(() => {
-      this.usuarios = this.usuarios.filter((u) => u.id !== id);
-    });
-  }
-
-  buscarUsuario(): Usuario[] {
-    return this.usuarios.filter((usuario) =>
-      usuario.nombre.toLowerCase().includes(this.filtro.toLowerCase())
-    );
-  }
 }
