@@ -2,28 +2,39 @@
     "usuario":[
         {
             "id": 1,
-            "nombre": "Juan Pérez",
-            "correo": "juan.perez@example.com",
-            "direccion": "Calle Falsa 123",
-            "telefono": "0987654321",
+            "nombre": "Carlos Andrade",
+            "correo": "carlos.andrade@outlook.com",
+            "telefono": "0985123456",
             "activo": true
-        },
-        {
+          },
+          {
             "id": 2,
-            "nombre": "María Gómez",
-            "correo": "maria.gomez@example.com",
-            "direccion": "Avenida Siempre Viva 456",
-            "telefono": "0998765432",
+            "nombre": "Luis Enrique Sánchez",
+            "correo": "luis.sanchez@hotmail.com",
+            "telefono": "0983246789",
             "activo": false
-        },
-        {
+          },
+          {
             "id": 3,
-            "nombre": "Gumbal Watreson",
-            "correo": "maria.gomez@example.com",
-            "direccion": "Avenida Siempre Viva 456",
-            "telefono": "0998765432",
+            "nombre": "Veronica Delgado",
+            "correo": "paola.delgado@yahoo.com",
+            "telefono": "0994578234",
+            "activo": true
+          },
+          {
+            "id": 4,
+            "nombre": "Natalia Gómez",
+            "correo": "natalia.gomez@icloud.com",
+            "telefono": "0976543210",
+            "activo": true
+          },
+          {
+            "id": 5,
+            "nombre": "Marco Díaz",
+            "correo": "Marco.diaz@live.com",
+            "telefono": "0941234567",
             "activo": false
-        }
+          }
     ],
     "uso":[
 
