@@ -1,1 +1,109 @@
-<p>{{title}}</p>
+<h3>{{title}}</h3>
+<div class="search container">
+    <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput type="search" placeholder="estado, recurso afectado"/>
+    </mat-form-field>
+</div>\
+<div class="container">
+    <!-- Formulario de Reportes -->
+    <div class="form-section">
+      <mat-card>
+        <form [formGroup]="reporteForm" (ngSubmit)="onSubmit()">
+          <!-- Campo de Título -->
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="titulo" />
+            <mat-error *ngIf="reportsform.get('titulo')?.hasError('required')">
+              El título es obligatorio
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Campo de Descripción -->
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput formControlName="descripcion"></textarea>
+            <mat-error *ngIf="reporteForm.get('descripcion')?.hasError('required')">
+              La descripción es obligatoria
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Campo de Recurso Afectado -->
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Recurso Afectado</mat-label>
+            <input matInput formControlName="recursoAfectado" />
+          </mat-form-field>
+  
+          <!-- Campo de Estado -->
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado" required>
+              <mat-option value="pendiente">Pendiente</mat-option>
+              <mat-option value="en proceso">En Proceso</mat-option>
+              <mat-option value="resuelto">Resuelto</mat-option>
+            </mat-select>
+            <mat-error *ngIf="reporteForm.get('estado')?.hasError('required')">
+              El estado es obligatorio
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Botón de Guardar -->
+          <button mat-raised-button color="primary" type="submit">
+            {{ editMode ? 'Actualizar' : 'Agregar' }}
+          </button>
+        </form>
+      </mat-card>
+    </div>
+  
+    <!-- Tabla de Reportes -->
+    <div class="table-section">
+      <div class="search-container">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por título o recurso" />
+        </mat-form-field>
+      </div>
+  
+      <mat-table [dataSource]="filteredReportes" class="mat-elevation-z8">
+        <!-- Columna de Título -->
+        <ng-container matColumnDef="titulo">
+          <mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
+          <mat-cell *matCellDef="let reporte"> {{ reporte.titulo }} </mat-cell>
+        </ng-container>
+  
+        <!-- Columna de Descripción -->
+        <ng-container matColumnDef="descripcion">
+          <mat-header-cell *matHeaderCellDef> Descripción </mat-header-cell>
+          <mat-cell *matCellDef="let reporte"> {{ reporte.descripcion }} </mat-cell>
+        </ng-container>
+  
+        <!-- Columna de Recurso -->
+        <ng-container matColumnDef="recurso">
+          <mat-header-cell *matHeaderCellDef> Recurso Afectado </mat-header-cell>
+          <mat-cell *matCellDef="let reporte"> {{ reporte.recursoAfectado || 'N/A' }} </mat-cell>
+        </ng-container>
+  
+        <!-- Columna de Estado -->
+        <ng-container matColumnDef="estado">
+          <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+          <mat-cell *matCellDef="let reporte"> {{ reporte.estado }} </mat-cell>
+        </ng-container>
+  
+        <!-- Columna de Acciones -->
+        <ng-container matColumnDef="acciones">
+          <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+          <mat-cell *matCellDef="let reporte">
+            <button mat-icon-button (click)="editReporte(reporte)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteReporte(reporte.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
