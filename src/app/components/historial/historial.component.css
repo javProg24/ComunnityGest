@@ -1,21 +1,44 @@
+/* Contenedor principal */
 .table-container {
-    margin: 20px 30px; /* Espaciado exterior: arriba/abajo 20px, izquierda/derecha 30px */
-}
-.mat-elevation-z8 {
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100%; /* La tabla ocupa todo el ancho del contenedor */
-}
-.mat-header-row, .mat-row {
+    margin: 20px auto; /* Espaciado vertical de 20px y centrado horizontal */
+    padding: 0 20px; /* Espaciado interno a los lados (izquierda y derecha) */
     display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todo horizontalmente */
+    text-align: center; /* Centra texto */
+    gap: 20px; /* Espaciado entre el título, notificaciones y la tabla */
+  }
+/* Tabla */
+.centered-table {
+    width: 100%; /* La tabla ocupará todo el ancho disponible */
+    max-width: 1200px; /* Tamaño máximo para limitar su ancho */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Oculta contenido desbordado */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra opcional para un mejor diseño */
+}
+mat-header-row,
+mat-row {
+    display: flex;
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+mat-header-cell,
+mat-cell {
+    padding: 20px; /* Espaciado interno de 20px en todas las celdas */
+    text-align: center; /* Centra el contenido de las celdas */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    justify-content: center;
     align-items: center;
 }
-.mat-header-cell,
-.mat-cell {
-    padding: 8px 16px;
-    text-align: left;
+  /* Encabezado de usuario con filtro */
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center;
+    justify-content: center;
+    gap: 8px; /* Espaciado entre el texto y el input */
 }
-
 /* Estilos para columnas específicas */
 .activo {
     color: #4caf50;
@@ -25,10 +48,9 @@
     color: #f44336;
     font-weight: bold;
 }
-
   /* Botones de acciones */
 button.mat-icon-button {
-    margin-right: 8px;
+    margin-right: 5px;
     display: inline-flex;
     align-items: center;
 }
@@ -43,19 +65,16 @@ button.mat-icon-button {
 .estado-pendiente {
     background-color: #ffeb3b; /* Amarillo */
     color: #000;              /* Negro */
-  }
-  
-  .estado-confirmada {
+}
+.estado-confirmada {
     background-color: #4caf50; /* Verde */
     color: #fff;               /* Blanco */
-  }
-  
-  .estado-cancelada {
+}
+.estado-cancelada {
     background-color: #f44336; /* Rojo */
     color: #fff;               /* Blanco */
-  }
-
-  .notification {
+}
+.notification {
     padding: 10px 20px;
     margin: 10px 0;
     border-radius: 5px;
@@ -69,35 +88,29 @@ button.mat-icon-button {
     position: relative;
     opacity: 1;
 }
-
 .notification.info {
     background-color: #d9f7ff;
     color: #007b7f;
     border: 1px solid #007b7f;
 }
-
 .notification.success {
     background-color: #d4edda;
     color: #155724;
     border: 1px solid #155724;
 }
-
 .notification.error {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #721c24;
 }
-/* cuadros de busqueda */
-.column-filters {
+.fitros{
     display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .column-filters mat-form-field {
-    width: 150px; /* Ajusta el ancho de los campos de texto */
-  }
-  
-  mat-table {
-    margin-top: 20px;
-  }
+    gap: 20px;
+    margin-bottom: 20px;
+    justify-content: space-around;
+    align-items: center;
+}
+mat-form-field{
+    width: 250px;
+    margin-right: 20px;
+}

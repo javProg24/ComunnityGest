@@ -1,55 +1,42 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormsModule, NgModelGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormField, MatLabel, MatFormFieldModule, MatError } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormField, MatLabel, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatCell, MatFooterCell, MatFooterRow, MatFooterRowDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatCell, MatHeaderCell, MatHeaderRow, MatRow, MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HistorialServiceService } from '../../services/historial-services/historial.service.service';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../shared/dialog/dialog.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { NotificationsComponent } from '../shared/notifications/notifications.component';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { ReservasServiceService } from '../../services/reservas-services/reservas.service.service';
 import { Reserva } from '../../models/reservas.model';
 import { Historial } from '../../models/historial.model';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Observable } from 'rxjs';
+import { MatNativeDateModule, MatOption, MatOptionModule, NativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import {MatDatepickerInput, MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker'
 @Component({
   selector: 'app-historial',
+  standalone: true,
   imports: [
-    MatCard,
-    MatFormField,
-    MatError,
-    MatLabel,
-    MatCheckbox,
-    MatTable,
-    MatHeaderCell,
-    MatCell,
-    MatIcon,
-    MatRow,
-    MatHeaderRow,
-    ReactiveFormsModule,
-    CommonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatIconModule,
-    MatDividerModule,
-    NotificationsComponent,
-    MatPaginator,
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTabsModule,FormsModule,MatFooterCell,MatFooterRow,MatFooterRowDef,FormsModule],
+    MatFormField,MatLabel,MatTable,
+    MatHeaderCell,MatOption, MatOptionModule,
+    MatCell,MatIcon,MatInputModule,
+    MatRow,MatHeaderRow,ReactiveFormsModule,
+    CommonModule,MatCardModule,MatFormFieldModule,
+    MatInputModule,MatButtonModule,MatCheckboxModule,
+    MatTableModule,MatIconModule,MatDividerModule,MatPaginator,
+    MatMenuModule,MatButtonModule,MatIconModule,
+    MatTabsModule,NativeDateModule,FormsModule,
+    FormsModule,MatFormFieldModule,MatSelectModule,
+    MatOptionModule,MatDatepickerModule,MatDatepickerToggle,MatNativeDateModule],
   templateUrl: './historial.component.html',
   styleUrl: './historial.component.css'
 })
@@ -64,6 +51,7 @@ export class HistorialComponent implements OnInit, AfterViewInit{
     message: '',
     type: 'info'
   };
+  filterTipo = ['Tecnológico', 'Material', 'Humano'];
   dataSource=new MatTableDataSource<Reserva>();
   dataHistorial=new MatTableDataSource<Historial>();
   ReservasColumns = ['id', 'usuario', 'tipo', 'descripcion', 'fechaInicio', 'fechaFin','estado','actions'];

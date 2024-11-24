@@ -7,7 +7,7 @@
             {{ notification.message }}
         </div>
         
-        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8 centered-table">
           <!-- Columna ID -->
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
@@ -71,25 +71,59 @@
     <mat-tab label="Historial">
         <div class="table-container">
             <h1>Historial de recursos</h1>
+
             <div *ngIf="notification.message" class="notification" [ngClass]="notification.type">
                 {{ notification.message }}
             </div>
-            
-            <mat-table [dataSource]="dataHistorial" class="mat-elevation-z8">
-            <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-                <mat-cell *matCellDef="let historial"> {{ historial.id }} </mat-cell>
-            </ng-container>
 
-            <ng-container matColumnDef="usuario">
+            <div class="filtros">
+              <mat-form-field appearance="outline">
+                <mat-label>Usuario</mat-label>
+                <input matInput placeholder="Buscar Usuario">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Tipo</mat-label>
+                <mat-select>
+                  <mat-option value="" >Seleccione...</mat-option>
+                  <mat-option value="Instalacion">Instalacion</mat-option>
+                  <mat-option value="Herramienta">Herramienta</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input matInput placeholder="Buscar descripcion">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha de inicio</mat-label>
+                <input matInput [matDatepicker]="pickerInicio"placeholder="Seleccionar fecha de inicio">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+                <mat-datepicker #pickerInicio></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha de fin</mat-label>
+                <input matInput [matDatepicker]="pickerfin" placeholder="Seleccionar fecha de fin">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerfin"></mat-datepicker-toggle>
+                <mat-datepicker #pickerfin></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <mat-table [dataSource]="dataHistorial" class="mat-elevation-z8 centered-table">
+              <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                  <mat-cell *matCellDef="let historial"> {{ historial.id }} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="usuario">
                 <mat-header-cell *matHeaderCellDef> Usuario </mat-header-cell>
-                <mat-cell *matCellDef="let historial"> {{ historial.usuario }} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="tipo">
+                <mat-cell *matCellDef="let reserva"> {{ reserva.usuario }} </mat-cell>
+              </ng-container>
+      
+              <!-- Columna Tipo -->
+              <ng-container matColumnDef="tipo">
                 <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
-                <mat-cell *matCellDef="let historial"> {{ historial.tipo }} </mat-cell>
-            </ng-container>
+                <mat-cell *matCellDef="let reserva"> {{ reserva.tipo }} </mat-cell>
+              </ng-container>
 
             <ng-container matColumnDef="descripcion">
                 <mat-header-cell mat-header-cell *matHeaderCellDef> Descripción </mat-header-cell>
