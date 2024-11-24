@@ -18,12 +18,11 @@ export class ReportesServiceService {
 
 
   //Buscar Reportes
-  getReportesSearch(recursoAfectado?:string, estado?:string):Observable<Reporte[]>{
+  getReportesSearch(recursoAfectado?:string, title?:string):Observable<Reporte[]>{
     return this.http.get<Reporte[]>(this.jsonUrl).pipe(
       map((reportes)=>
         reportes.filter((reporte)=>
-        (recursoAfectado ? reporte.recursoAfectado?.toLocaleLowerCase().includes(recursoAfectado.toLowerCase()):true) &&
-        (estado ? reporte.estado?.toLocaleLowerCase().includes(estado.toLocaleLowerCase()):true)
+        (recursoAfectado ? reporte.recursoAfectado?.toLocaleLowerCase().includes(recursoAfectado.toLowerCase()):true)
         )
       )
     );
@@ -35,7 +34,7 @@ export class ReportesServiceService {
   }
 
   //Editar Reportes
-  updateReports(reporte:Reporte):Observable<Reporte>{
+  updateReports(p0: string, reporte: Reporte):Observable<Reporte>{
     const urlReporte = `${this.jsonUrl}/${reporte.id}`
     return this.http.put<Reporte>(urlReporte, reporte);
   }

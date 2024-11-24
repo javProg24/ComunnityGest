@@ -1,21 +1,60 @@
 {
-    "reportes":[
-        
-        {
-          "id": "1",
-          "reportegenen": "Fuga de agua en la calle principal",
-          "descripcion": "Hay una fuga de agua cerca del mercado central.",
-          "recursoAfectado": "Agua",
-          "estado": "pendiente"
-        },
-        {
-          "id": "2",
-          "reportegenen": "Árbol caído en el parque",
-          "descripcion": "Un árbol cayó bloqueando la entrada al parque.",
-          "recursoAfectado": "Árbol",
-          "estado": "en proceso"
-        }
-        
-        
-    ]
+  "reportes": [
+    {
+      "id": "1",
+      "title": "Fuga de agua en la calle principal",
+      "descripcion": "Hay una fuga de agua cerca del mercado central.",
+      "recursoAfectado": "Agua",
+      "estado": false
+    },
+    {
+      "id": "2",
+      "title": "Árbol caído en el parque",
+      "descripcion": "Un árbol cayó bloqueando la entrada al parque.",
+      "recursoAfectado": "Árbol",
+      "estado": false
+    },
+    {
+      "id": "3",
+      "title": "Alumbrado público dañado",
+      "descripcion": "La luz en la esquina de la avenida principal no funciona.",
+      "recursoAfectado": "Electricidad",
+      "estado": false
+    },
+    {
+      "id": "4",
+      "title": "Basura acumulada en la plaza",
+      "descripcion": "Montones de basura están obstruyendo la vía.",
+      "recursoAfectado": "Limpieza",
+      "estado": false
+    },
+    {
+      "id": "5",
+      "title": "Transformador dañado en la zona residencial",
+      "descripcion": "Se reporta un apagón debido a un transformador quemado.",
+      "recursoAfectado": "Electricidad",
+      "estado": false
+    },
+    {
+      "id": "6",
+      "title": "Hueco en la carretera principal",
+      "descripcion": "Hay un hueco que representa peligro para los vehículos.",
+      "recursoAfectado": "Carretera",
+      "estado": false
+    },
+    {
+      "id": "7",
+      "title": "Plaga en los árboles del parque",
+      "descripcion": "Una plaga está afectando los árboles del parque central.",
+      "recursoAfectado": "Árboles",
+      "estado": false
+    },
+    {
+      "id": "8",
+      "title": "Falla en semáforos",
+      "descripcion": "El semáforo de la intersección principal no está funcionando.",
+      "recursoAfectado": "Semáforos",
+      "estado": false
+    }
+  ]
 }

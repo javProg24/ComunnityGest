@@ -1,7 +1,7 @@
 export interface Reporte {
-    id: string; 
-    titulo: string;
+    id?: string; 
+    title: string;
     descripcion: string;
     recursoAfectado?: string; 
-    estado: 'pendiente' | 'resuelto' | 'en proceso'; 
+    estado: boolean; 
 }
