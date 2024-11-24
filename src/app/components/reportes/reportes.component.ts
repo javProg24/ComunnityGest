@@ -46,17 +46,18 @@ export class ReportesComponent implements OnInit, AfterViewInit{
   }
 
   constructor(private miServicioRep: ReportesServiceService, private fb: FormBuilder, private mydialog: MatDialog){
-    this.reporteForm = this.fb.group({
-      titulo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      recursoAfectado: [''],
-      estado: ['', Validators.required],
-    });
+    
   }  
   
 
   ngOnInit():void{
     this.getReportes();
+    this.reporteForm = this.fb.group({
+      title: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      recursoAfectado: ['', Validators.required],
+      estado: ['', Validators.required],
+    });
   }
 
   getReportes(): void{
@@ -110,7 +111,12 @@ export class ReportesComponent implements OnInit, AfterViewInit{
   }
 
   edit(reporte: Reporte){
-
+    this.reporteForm.setValue({
+      title: reporte.title,
+      descripcion: reporte.descripcion,
+      recursoAfectado: reporte.recursoAfectado,
+      estado: reporte.estado,
+    });
   }
 
   resetForm(): void {
