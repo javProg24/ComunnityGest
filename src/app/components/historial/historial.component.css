@@ -103,14 +103,21 @@ button.mat-icon-button {
     color: #721c24;
     border: 1px solid #721c24;
 }
-.fitros{
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-    justify-content: space-around;
-    align-items: center;
-}
-mat-form-field{
-    width: 250px;
-    margin-right: 20px;
-}
+.filtros {
+    display: flex; /* Alinea los elementos en una sola fila */
+    justify-content: flex-start; /* Los elementos se alinean al inicio */
+    align-items: center; /* Asegura que estén centrados verticalmente */
+    gap: 10px; /* Espaciado uniforme entre los elementos */
+    margin-bottom: 20px; /* Espaciado entre el formulario y la tabla */
+  }
+  
+  .filtros mat-form-field {
+    flex: 0 0 auto; /* Evita que los elementos cambien de tamaño o se desplacen */
+    margin-right: 10px; /* Espaciado a la derecha de cada campo */
+    min-width: 150px; /* Ancho mínimo */
+    width: 275px;
+  }
+  
+  .filtros mat-form-field:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último elemento */
+  }

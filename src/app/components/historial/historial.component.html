@@ -71,16 +71,28 @@
     <mat-tab label="Historial">
         <div class="table-container">
             <h1>Historial de recursos</h1>
-
+            <button mat-button (click)="verUsuario()">Ver usuario</button>
             <div *ngIf="notification.message" class="notification" [ngClass]="notification.type">
                 {{ notification.message }}
             </div>
 
             <div class="filtros">
+            <form [formGroup]="formulario">
               <mat-form-field appearance="outline">
                 <mat-label>Usuario</mat-label>
-                <input matInput placeholder="Buscar Usuario">
+                <input matInput 
+                type="search" 
+                [matAutocomplete]="auto"
+                placeholder="Buscar Usuario"
+                (keyup)="buscarUsuario(searchInput.value)"
+                #searchInput/>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let usuario of usuariosFiltrados" [value]="usuario.nombre">
+                    {{usuario.nombre}}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
+
               <mat-form-field appearance="outline">
                 <mat-label>Tipo</mat-label>
                 <mat-select>
@@ -89,10 +101,12 @@
                   <mat-option value="Herramienta">Herramienta</mat-option>
                 </mat-select>
               </mat-form-field>
+
               <mat-form-field appearance="outline">
                 <mat-label>Descripción</mat-label>
                 <input matInput placeholder="Buscar descripcion">
               </mat-form-field>
+
               <mat-form-field appearance="outline">
                 <mat-label>Fecha de inicio</mat-label>
                 <input matInput [matDatepicker]="pickerInicio"placeholder="Seleccionar fecha de inicio">
@@ -106,8 +120,10 @@
                 <mat-datepicker-toggle matIconSuffix [for]="pickerfin"></mat-datepicker-toggle>
                 <mat-datepicker #pickerfin></mat-datepicker>
               </mat-form-field>
+            </form>
             </div>
-
+            <button mat-flat-button (click)="buscar()">Buscar</button>
+            <!-- tabla -->
             <mat-table [dataSource]="dataHistorial" class="mat-elevation-z8 centered-table">
               <ng-container matColumnDef="id">
                   <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>

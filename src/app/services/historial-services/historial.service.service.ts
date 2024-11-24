@@ -15,16 +15,11 @@ export class HistorialServiceService {
     return this.http.get<Historial[]>(this.jsonUrl);
   }
   //guardar historial
-  addHistorial(recurso:Historial):Observable<Historial>{
-    return this.http.post<Historial>(this.jsonUrl,recurso);
+  addHistorial(historial:Historial):Observable<Historial>{
+    return this.http.post<Historial>(this.jsonUrl,historial);
   }
   // eliminar
-  deleteHistorial(recurso:Historial[],id:number):Historial[]{
-    return recurso.filter(recurso=>recurso.id!==id)
+  deleteHistorial(historial:Historial[],id:number):Historial[]{
+    return historial.filter(historial=>historial.id!==id)
   }
-  // buscar por usuario
-  searchRegisterUser(){
-
-  }
-  
 }

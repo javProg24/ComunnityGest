@@ -1,35 +1,35 @@
 {
   "usuario": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Carlos Andrade",
       "correo": "carlos.andrade@outlook.com",
       "telefono": "0985123456",
       "activo": true
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Luis Enrique Sánchez",
       "correo": "luis.sanchez@hotmail.com",
       "telefono": "0983246789",
       "activo": false
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Veronica Delgado",
       "correo": "paola.delgado@yahoo.com",
       "telefono": "0994578234",
       "activo": true
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Natalia Gómez",
       "correo": "natalia.gomez@icloud.com",
       "telefono": "0976543210",
       "activo": true
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "Marco Díaz",
       "correo": "Marco.diaz@live.com",
       "telefono": "0941234567",
@@ -116,12 +116,28 @@
       "descripcion": "Salón comunal",
       "fechaInicio": "2024-06-15T10:00:00",
       "fechaFin": "2024-06-15T12:00:00"
+    },
+    {
+      "id": "50ea",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
+    },
+    {
+      "id": "6407",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
     }
   ],
   "reporte": [],
   "reservas": [
     {
-      "id": 1,
+      "id": "1",
       "usuario": "Carlos Andrade",
       "tipo": "Instalacion",
       "fechaInicio": "2024-06-15T10:00:00",
@@ -130,7 +146,7 @@
       "descripcion": "Salón comunal"
     },
     {
-      "id": 2,
+      "id": "2",
       "usuario": "Luis Enrique Sánchez",
       "tipo": "Herramienta",
       "fechaInicio": "2024-06-20T14:00:00",
@@ -141,28 +157,28 @@
   ],
   "herramientas": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Cortadora de Césped Eléctrica",
       "estado": "Disponible",
       "ubicacion": "Almacén Central",
       "descripcion": "Herramienta eléctrica para cortar césped de áreas pequeñas y medianas."
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Mesa de Eventos Plegable",
       "estado": "En reparación",
       "ubicacion": "Almacén de Eventos",
       "descripcion": "Mesa de eventos para colocar en salones o áreas al aire libre."
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Pistola de Pintura Eléctrica",
       "estado": "Disponible",
       "ubicacion": "Almacén de Herramientas",
       "descripcion": "Herramienta eléctrica para pintar grandes superficies de manera uniforme."
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Escalera Extensible",
       "estado": "Disponible",
       "ubicacion": "Almacén de Herramientas",
@@ -171,28 +187,28 @@
   ],
   "instalaciones": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Salón Comunal A",
       "tipo": "Salón Comunal",
       "capacidad": 50,
       "horarioDisponible": "Lunes a Viernes, de 9:00 AM a 6:00 PM"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Cancha de Fútbol",
       "tipo": "Área Deportiva",
       "capacidad": 20,
       "horarioDisponible": "Todos los días, de 7:00 AM a 10:00 PM"
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Salón de Eventos",
       "tipo": "Salón Comunal",
       "capacidad": 100,
       "horarioDisponible": "Sábados y Domingos, de 10:00 AM a 8:00 PM"
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Gimnasio Comunitario",
       "tipo": "Área Deportiva",
       "capacidad": 30,
@@ -201,7 +217,7 @@
   ],
   "integrante": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Javier",
       "apellido": "Tomala Gonzalez",
       "foto": "../image/Tomala.jpeg",
@@ -210,7 +226,7 @@
       "rol": ""
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Pedro",
       "apellido": "Aviles Martinez",
       "foto": "../image/Aviles.png",
@@ -219,7 +235,7 @@
       "rol": ""
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Jean",
       "apellido": "Romero Serrano",
       "foto": "../image/Romero.jpeg",
@@ -228,7 +244,7 @@
       "rol": ""
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Marcos",
       "apellido": "Falconni Caiza",
       "foto": "../image/Falconni.jpeg",
@@ -237,7 +253,7 @@
       "rol": ""
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "Steven",
       "apellido": "Falquez Lopez",
       "foto": "../image/Falquez.png",
@@ -246,7 +262,7 @@
       "rol": ""
     },
     {
-      "id": 6,
+      "id": "6",
       "nombre": "Desconocido",
       "apellido": "apellidos",
       "foto": "../image/default.png",

@@ -1,0 +1,17 @@
+mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Espaciado entre campos */
+    max-height: 80vh; /* Evita que el contenido se desborde verticalmente */
+    overflow-y: auto; /* Habilita el desplazamiento si es necesario */
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px; /* Espaciado entre botones */
+  }

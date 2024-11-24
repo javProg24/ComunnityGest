@@ -1,37 +1,31 @@
 <mat-dialog-content class="search-container">
-    <form [formGroup]="formulario" (ngSubmit)="guardar()">
-        <p>usuario</p>
-        <mat-form-field appearance="fill">
-            <mat-label>Buscar</mat-label>
-            <input
-            matInput
-            type="search"
-            placeholder="Nombres"
-            [matAutocomplete]="auto"
-            (keyup)="buscarUsuario(searchInput.value)"
-            #searchInput
-            />
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let usuario of usuariosFiltrados" [value]="usuario.nombre">
-                    {{ usuario.nombre }}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Tipo: </mat-label>
-            <mat-select formControlName="tipo">
-                <mat-option value="">Seleccione ...</mat-option>
-                <mat-option value="Instalacion">Instalacion</mat-option>
-                <mat-option value="Herramienta">Herramienta</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label></mat-label>
-        </mat-form-field>
-
-
+    <form [formGroup]="formulario">
+      <p>Usuario</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Buscar</mat-label>
+        <input
+          matInput
+          type="search"
+          placeholder="Nombres"
+          [matAutocomplete]="auto"
+          (keyup)="buscarUsuario(searchInput.value)"
+          #searchInput
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let usuario of usuariosFiltrados" [value]="usuario.nombre">
+            {{ usuario.nombre }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Tipo:</mat-label>
+        <mat-select formControlName="tipo">
+          <mat-option value="">Seleccione...</mat-option>
+          <mat-option value="Instalacion">Instalación</mat-option>
+          <mat-option value="Herramienta">Herramienta</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
-</mat-dialog-content>
-
+  </mat-dialog-content>
+  

@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormField, MatLabel, MatFormFieldModule } from '@angular/material/form-field';
@@ -22,19 +22,23 @@ import { Observable } from 'rxjs';
 import { MatNativeDateModule, MatOption, MatOptionModule, NativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerInput, MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker'
+import { FormDialogComponent } from '../shared/form-dialog/form-dialog.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { Usuario } from '../../models/usuarios.model';
+import { UsuariosService } from '../../services/usuarios-services/usuarios.service.service';
 @Component({
   selector: 'app-historial',
   standalone: true,
   imports: [
     MatFormField,MatLabel,MatTable,
     MatHeaderCell,MatOption, MatOptionModule,
-    MatCell,MatIcon,MatInputModule,
+    MatCell,MatIcon,MatInputModule,MatAutocompleteModule,
     MatRow,MatHeaderRow,ReactiveFormsModule,
     CommonModule,MatCardModule,MatFormFieldModule,
     MatInputModule,MatButtonModule,MatCheckboxModule,
     MatTableModule,MatIconModule,MatDividerModule,MatPaginator,
     MatMenuModule,MatButtonModule,MatIconModule,
-    MatTabsModule,NativeDateModule,FormsModule,
+    MatTabsModule,NativeDateModule,FormsModule,NgFor,
     FormsModule,MatFormFieldModule,MatSelectModule,
     MatOptionModule,MatDatepickerModule,MatDatepickerToggle,MatNativeDateModule],
   templateUrl: './historial.component.html',
@@ -44,6 +48,7 @@ export class HistorialComponent implements OnInit, AfterViewInit{
   reservas: Reserva[]=[];
   historiales: Historial[] = [];
   filterHistorial:Historial[]=[];
+  usuariosFiltrados: Usuario[] = [];
   filterReservas:Reserva[]=[];
   columnFilters: { [key: string]: string } = {};
   columns = ['id', 'usuario', 'tipo','descripcion','fechaInicio','fechaFin'];
@@ -57,14 +62,22 @@ export class HistorialComponent implements OnInit, AfterViewInit{
   ReservasColumns = ['id', 'usuario', 'tipo', 'descripcion', 'fechaInicio', 'fechaFin','estado','actions'];
   HistorialColumns=['id', 'usuario', 'tipo', 'descripcion', 'fechaInicio', 'fechaFin','actions'];
   filter = { id: '', usuario: '', tipo: '',descripcion:'',fechaInicio:'', fechaFin:''};
+  formulario!:FormGroup;
   @ViewChild(MatPaginator) paginator!:MatPaginator;
   @ViewChild('paginatorHistorial') paginatorHistorial!: MatPaginator;
   constructor(private reservaService:ReservasServiceService,private mydialog:MatDialog,
-    private historialService:HistorialServiceService
+    private historialService:HistorialServiceService,private fb:FormBuilder,private usuarioService:UsuariosService
   ){}
   ngOnInit(): void {
       this.verReservas();
       this.verHistorial();
+      this.formulario = this.fb.group({
+        usuario:[''],
+        tipo:[''],
+        descripcion:[''],
+        fechaInicio:[''],
+        fechaFin:['']
+      })
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator=this.paginator;
@@ -116,7 +129,7 @@ export class HistorialComponent implements OnInit, AfterViewInit{
             (response) => {
               this.notification = { message: 'Registro guardado exitosamente', type: 'success' };
               this.actualizarTablaHisto(); // Actualizar tabla si es necesario
-              this.verHistorial();
+              //this.verHistorial();
               // Desaparición automática de la notificación
               setTimeout(() => {
                 this.notification = { message: '', type: 'info' };
@@ -135,12 +148,10 @@ export class HistorialComponent implements OnInit, AfterViewInit{
     });
     return dialogRef.afterClosed();
   }
-  
   private manejarError(message: string, error: any): void {
     this.notification = { message, type: 'error' };
     console.error(message, error);
   }
-
   eliminarRegistro(id: number): void {
     const dialogRef = this.mydialog.open(DialogComponent, {
       data: {
@@ -151,9 +162,8 @@ export class HistorialComponent implements OnInit, AfterViewInit{
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        
         this.historiales = this.historialService.deleteHistorial(this.historiales, id);
-        this.dataHistorial.data = [...this.historiales];
+        this.actualizarTablaHisto();
         this.notification = { message: 'Registro eliminado exitosamente', type: 'success' };
         setTimeout(() => {
           this.notification = { message: '', type: 'info' };
@@ -161,12 +171,27 @@ export class HistorialComponent implements OnInit, AfterViewInit{
       }
     });
   }
-  
-
-  actualizarTablaReservas():void{
-    this.filterReservas=[...this.reservas];
-  }
   actualizarTablaHisto():void{
-    this.filterHistorial=[...this.historiales];
+    this.dataHistorial.data = [...this.historiales];
+  }
+  verUsuario() {
+    this.mydialog.open(FormDialogComponent, {
+      width: '400px', // Ancho opcional
+      height: '600px', // Alto opcional
+    });
+  }
+  buscarUsuario(nombre: string): void {
+    if (!nombre) {
+      this.usuariosFiltrados = [];
+      return;
+    }
+
+    this.usuarioService.getUsuarioSearch(nombre).subscribe((usuarios) => {
+      console.log('Usuarios obtenidos:', usuarios); // Verifica que los datos se reciban
+      this.usuariosFiltrados = usuarios;
+    });
+  }
+  buscar(){
+    
   }
 } 
