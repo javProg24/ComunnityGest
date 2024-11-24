@@ -5,7 +5,7 @@
       "title": "Fuga de agua en la calle principal",
       "descripcion": "Hay una fuga de agua cerca del mercado central.",
       "recursoAfectado": "Agua",
-      "estado": false
+      "estado": true
     },
     {
       "id": "2",
@@ -40,20 +40,34 @@
       "title": "Hueco en la carretera principal",
       "descripcion": "Hay un hueco que representa peligro para los vehículos.",
       "recursoAfectado": "Carretera",
-      "estado": false
+      "estado": true
     },
     {
       "id": "7",
       "title": "Plaga en los árboles del parque",
       "descripcion": "Una plaga está afectando los árboles del parque central.",
       "recursoAfectado": "Árboles",
-      "estado": false
+      "estado": true
     },
     {
-      "id": "8",
       "title": "Falla en semáforos",
       "descripcion": "El semáforo de la intersección principal no está funcionando.",
       "recursoAfectado": "Semáforos",
+      "estado": true,
+      "id": "8"
+    },
+    {
+      "title": "Falla sistema de sonido",
+      "descripcion": "El sistema de sonido comunitario suena muy alterado y mal.",
+      "recursoAfectado": "Sistema Sonido C.",
+      "estado": true,
+      "id": "68bc"
+    },
+    {
+      "id": "5edb",
+      "title": "Problema Alcantarillado",
+      "descripcion": "El alcantarillado se encuentra colapsado.",
+      "recursoAfectado": "Alcantarillado",
       "estado": false
     }
   ]

@@ -1,5 +1,5 @@
 export interface Reporte {
-    id?: string; 
+    id?: number; 
     title: string;
     descripcion: string;
     recursoAfectado?: string; 

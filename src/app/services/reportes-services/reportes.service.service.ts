@@ -34,7 +34,7 @@ export class ReportesServiceService {
   }
 
   //Editar Reportes
-  updateReports(p0: string, reporte: Reporte):Observable<Reporte>{
+  updateReports(reporte: Reporte):Observable<Reporte>{
     const urlReporte = `${this.jsonUrl}/${reporte.id}`
     return this.http.put<Reporte>(urlReporte, reporte);
   }

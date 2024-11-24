@@ -15,12 +15,12 @@
         <input matInput type="text" placeholder="recurso a." formControlName="recursoAfectado"/>
     </mat-form-field>
     <mat-radio-group aria-label="Select an option" class="formElement" formControlName="estado">
-        <mat-radio-button value=true>Solucionado</mat-radio-button>
-        <mat-radio-button value=false>Sin Solucionar</mat-radio-button>
+        <mat-radio-button [value]="true">Solucionado</mat-radio-button>
+        <mat-radio-button [value]="false">Sin Solucionar</mat-radio-button>
     </mat-radio-group>
     <div class="actions">
-        <button mat-raised-button color="accent" type="submit">Guardar</button>
-        <button mat-raised-button color="warn" type="reset">Cancelar</button>
+        <button mat-raised-button color="accent" type="submit" (click)="onSubmit()">Guardar</button>
+        <button mat-raised-button color="warn" type="reset" (click)="cleanForm()">Cancelar</button>
     </div>
 
 </form>
@@ -59,8 +59,8 @@
             <button mat-raised-button color="warn" (click)="delete(reporte)">Eliminar</button>
         </td>
       </ng-container>
-      <tr mat-header-row *matHeaderRowDef="['title', 'recursoAfectado', 'estado', 'actions']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['title', 'recursoAfectado', 'estado', 'actions'];"></tr>
+      <tr mat-header-row *matHeaderRowDef="['title', 'descripcion','recursoAfectado',  'estado', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['title', 'descripcion', 'recursoAfectado', 'estado', 'actions'];"></tr>
       
 
 </table>

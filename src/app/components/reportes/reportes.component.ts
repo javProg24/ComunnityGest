@@ -32,7 +32,7 @@ export class ReportesComponent implements OnInit, AfterViewInit{
   reportes: Reporte[]=[];
   filteredReportes: Reporte[] = [];
   reporteForm!: FormGroup;
-  editMode = false;
+  editMode: boolean=false;
   currentId!:number;
   dataSource = new MatTableDataSource<Reporte>();
   editId: string | null = null;
@@ -80,17 +80,25 @@ export class ReportesComponent implements OnInit, AfterViewInit{
   
 
   onSubmit() {
-    if (this.reporteForm.invalid) return;
-  
-      const newReporte = this.reporteForm.value as Reporte;
+    if (this.reporteForm.invalid) {
+      return;
+    }
+      const newReporte:Reporte = this.reporteForm.value;
   
       if (this.editMode) {
-        this.miServicioRep.updateReports(this.editId!, newReporte);
+        newReporte.id = this.currentId
+        this.miServicioRep.updateReports(newReporte).subscribe((updateRep)=>{
+          alert("El reporte fue editado exitosamente")
+          this.getReportes();
+        })
       } else {
-        this.miServicioRep.addReporte(newReporte);
+        this.miServicioRep.addReporte(newReporte).subscribe((addRep)=>{
+          alert("El reporte agregado exitosamente")
+          this.getReportes();
+        })
       }
   
-      this.resetForm();
+      this.cleanForm();
   }
   delete(reporte: Reporte){
 
@@ -111,6 +119,16 @@ export class ReportesComponent implements OnInit, AfterViewInit{
   }
 
   edit(reporte: Reporte){
+    
+    this.editMode = true;
+
+    if(reporte && reporte.id){
+      this.currentId = reporte.id;
+    }else{
+      console.log("Reporte o id del reporte, esta undefined")
+    }
+    
+
     this.reporteForm.setValue({
       title: reporte.title,
       descripcion: reporte.descripcion,
@@ -118,10 +136,14 @@ export class ReportesComponent implements OnInit, AfterViewInit{
       estado: reporte.estado,
     });
   }
-
-  resetForm(): void {
-    this.reporteForm.reset();
+  cleanForm():void{
+    this.reporteForm.reset({
+      title: '',
+      descripcion: '',
+      recursoAfectado: '',
+      estado: '',
+    });
+    this.currentId = 0;
     this.editMode = false;
-    this.editId = null;
   }
 }
