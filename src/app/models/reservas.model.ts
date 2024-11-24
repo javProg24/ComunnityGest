@@ -1,9 +1,9 @@
 export interface Reserva {
     id?: number;
-    usuarioId: string;
-    recursoId: number;
+    usuario: string;
+    tipo: number;
     fechaInicio: Date;
     fechaFin: Date;
-    estado: 'PENDIENTE' | 'CONFIRMADA' | 'CANCELADA';
+    estado: string;
     descripcion?: string;
   }

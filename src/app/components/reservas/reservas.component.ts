@@ -8,6 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
 import { Reserva } from '../../models/reservas.model';
 import { ReservasService } from '../../services/reservas-services/reservas.service.service';
 
@@ -23,15 +26,18 @@ import { ReservasService } from '../../services/reservas-services/reservas.servi
     MatIconModule,
     MatTooltipModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule,
+    MatIcon,
+    MatButton
   ],
   templateUrl: './reservas.component.html',
-  styleUrl: './reservas.component.css'
+  styleUrls: ['./reservas.component.css']
 })
 export class ReservasComponent implements OnInit {
   reservasForm: FormGroup;
   reservas: Reserva[] = [];
-  columnas: string[] = ['usuarioId', 'recursoId', 'fechaInicio', 'fechaFin', 'estado', 'acciones'];
+  columnas: string[] = ['usuario', 'tipo', 'fechaInicio', 'fechaFin', 'estado', 'acciones'];
   filtro: string = '';
   modoEdicion = false;
   reservaSeleccionada: Reserva | null = null;
@@ -48,12 +54,11 @@ export class ReservasComponent implements OnInit {
     private dialog: MatDialog
   ) {
     this.reservasForm = this.fb.group({
-      usuarioId: ['', Validators.required],
-      recursoId: ['', Validators.required],
+      usuario: ['', Validators.required],
+      tipo: ['', Validators.required],
       fechaInicio: ['', Validators.required],
       fechaFin: ['', Validators.required],
-      estado: ['PENDIENTE', Validators.required],
-      descripcion: ['']
+      estado: ['PENDIENTE', Validators.required]
     });
   }
 
@@ -69,8 +74,8 @@ export class ReservasComponent implements OnInit {
 
   buscarReservas(): Reserva[] {
     return this.reservas.filter(reserva =>
-      reserva.usuarioId.toString().includes(this.filtro) ||
-      reserva.recursoId.toString().includes(this.filtro) ||
+      reserva.usuario.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      reserva.tipo.toString().includes(this.filtro.toLowerCase()) ||
       reserva.estado.toLowerCase().includes(this.filtro.toLowerCase())
     );
   }
@@ -78,12 +83,10 @@ export class ReservasComponent implements OnInit {
   crearReserva() {
     if (this.reservasForm.valid) {
       const nuevaReserva: Reserva = this.reservasForm.value;
-      this.reservasService.crearReserva(nuevaReserva).subscribe(
-        () => {
-          this.cargarReservas();
-          this.reservasForm.reset();
-        }
-      );
+      this.reservasService.crearReserva(nuevaReserva).subscribe(() => {
+        this.cargarReservas();
+        this.reservasForm.reset();
+      });
     }
   }
 
@@ -99,19 +102,17 @@ export class ReservasComponent implements OnInit {
         ...this.reservaSeleccionada,
         ...this.reservasForm.value
       };
-      this.reservasService.actualizarReserva(reservaActualizada).subscribe(
-        () => {
-          this.cargarReservas();
-          this.cancelarEdicion();
-        }
-      );
+      this.reservasService.actualizarReserva(reservaActualizada.id!, reservaActualizada).subscribe(() => {
+        this.cargarReservas();
+        this.cancelarEdicion();
+      });
     }
   }
 
   eliminarReserva(id: number) {
-    this.reservasService.eliminarReserva(id).subscribe(
-      () => this.cargarReservas()
-    );
+    this.reservasService.eliminarReserva(id).subscribe(() => {
+      this.cargarReservas();
+    });
   }
 
   cancelarEdicion() {
