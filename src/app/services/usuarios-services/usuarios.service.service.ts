@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuarios.model';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +33,15 @@ export class UsuariosService {
   // Eliminación de un usuario
   deleteUsuario(usuarios: Usuario[], id: number): Usuario[] {
     return usuarios.filter(usuario => usuario.id !== id);
-  }  
+  }
+  //buscar usuario
+  getUsuarioSearch(nombre?:string):Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(this.apiUrl).pipe(
+      map((usuarios)=>
+        usuarios.filter((usuario)=>
+          nombre? usuario.nombre.toLowerCase().includes(nombre.toLowerCase()):true
+        )
+      )
+    )
+  } 
 }

@@ -1,0 +1,41 @@
+.table-container {
+    margin: 20px 30px; /* Espaciado exterior: arriba/abajo 20px, izquierda/derecha 30px */
+}
+.mat-elevation-z8 {
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%; /* La tabla ocupa todo el ancho del contenedor */
+}
+.mat-header-row, .mat-row {
+    display: flex;
+    align-items: center;
+}
+.mat-header-cell,
+.mat-cell {
+    padding: 8px 16px;
+    text-align: left;
+}
+
+/* Estilos para columnas específicas */
+.activo {
+    color: #4caf50;
+    font-weight: bold;
+}
+.inactivo {
+    color: #f44336;
+    font-weight: bold;
+}
+
+  /* Botones de acciones */
+button.mat-icon-button {
+    margin-right: 8px;
+    display: inline-flex;
+    align-items: center;
+}
+.mat-icon {
+    font-size: 20px;
+}
+.actions{
+    margin-left: 20px;
+    margin-top: 30px;
+}

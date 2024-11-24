@@ -12,4 +12,5 @@ import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, Ma
 
 export class DialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { titulo: string; mensaje: string }) {}
+  
 }

@@ -1,36 +1,52 @@
-<p>recursos works!</p>
-<table mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let recurso"> {{recurso.id}} </td>
-    </ng-container>
-    <ng-container matColumnDef="usuario">
-        <th mat-header-cell *matHeaderCellDef> Usuario </th>
-        <td mat-cell *matCellDef="let recurso"> {{recurso.usuario}} </td>
-    </ng-container>
-    <ng-container matColumnDef="tipo">
-        <th mat-header-cell *matHeaderCellDef> Tipo </th>
-        <td mat-cell *matCellDef="let recurso"> {{recurso.tipo}} </td>
-    </ng-container>
-    <ng-container matColumnDef="recursos">
-        <th mat-header-cell *matHeaderCellDef> Recursos </th>
-        <td mat-cell *matCellDef="let recurso"> {{recurso.recursos}} </td>
-    </ng-container>
-    <ng-container matColumnDef="fecha">
-        <th mat-header-cell *matHeaderCellDef> Fecha </th>
-        <td mat-cell *matCellDef="let recurso"> {{recurso.fecha}} </td>
-    </ng-container>
-    <ng-container matColumnDef="horaInicio">
-        <th mat-header-cell *matHeaderCellDef> Hora Inicio </th>
-        <td mat-cell *matCellDef="let recurso"> {{recurso.horaInicio}} </td>
-    </ng-container>
-    <ng-container matColumnDef="horaFin">
-        <th mat-header-cell *matHeaderCellDef> Hora Fin </th>
-        <td mat-cell *matCellDef="let recurso"> {{recurso.horaFin}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="['id','usuario','tipo','recursos','fecha','horaInicio','horaFin']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['id','usuario','tipo','recursos','fecha','horaInicio','horaFin'];"></tr>
-</table>
+<div class="actions">
+    <button mat-raised-button color="primary" (click)="nuevo()">
+        <mat-icon>add</mat-icon>
+        Nuevo
+    </button>
+</div>
+<div class="table-container">
+    <mat-table [dataSource]="filterRegistro" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let recurso"> {{recurso.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="usuario">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Usuario </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let recurso"> {{recurso.usuario}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="tipo">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let recurso"> {{recurso.tipo}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="recursos">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Recursos </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let recurso"> {{recurso.recursos}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="fecha">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let recurso"> {{recurso.fecha}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="horaInicio">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Hora Inicio </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let recurso"> {{recurso.horaInicio}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="horaFin">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Hora Fin </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let recurso"> {{recurso.horaFin}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="actions">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+            <mat-cell *matCellDef="let recurso">
+                <button mat-icon-button color="warn" (click)="eliminarRegistro(recurso.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
 <mat-paginator [length]="200" [pageSizeOptions]="[10, 7, 20]" aria-label="Select page" showFirstLastButtons>
 </mat-paginator>
