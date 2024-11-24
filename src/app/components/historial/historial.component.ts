@@ -1,27 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgModelGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
-import { MatOptionModule, MatNativeDateModule } from '@angular/material/core';
 import { MatFormField, MatLabel, MatFormFieldModule, MatError } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCell, MatHeaderCell, MatHeaderRow, MatRow, MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatRadioModule} from '@angular/material/radio';
-import { Recurso } from '../../models/historial.model';
+import { MatCell, MatFooterCell, MatFooterRow, MatFooterRowDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HistorialServiceService } from '../../services/historial-services/historial.service.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MyDialogComponent } from '../shared/my-dialog/my-dialog.component';
-import { FormDialogComponent } from '../shared/form-dialog/form-dialog.component';
 import { DialogComponent } from '../shared/dialog/dialog.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { NotificationsComponent } from '../shared/notifications/notifications.component';
 import { MatCard, MatCardModule } from '@angular/material/card';
-
+import { ReservasServiceService } from '../../services/reservas-services/reservas.service.service';
+import { Reserva } from '../../models/reservas.model';
+import { Historial } from '../../models/historial.model';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-historial',
   imports: [
@@ -46,75 +44,141 @@ import { MatCard, MatCardModule } from '@angular/material/card';
     MatTableModule,
     MatIconModule,
     MatDividerModule,
-    NotificationsComponent,MatPaginator],
+    NotificationsComponent,
+    MatPaginator,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule,FormsModule,MatFooterCell,MatFooterRow,MatFooterRowDef,FormsModule],
   templateUrl: './historial.component.html',
   styleUrl: './historial.component.css'
 })
 export class HistorialComponent implements OnInit, AfterViewInit{
-  registros: Recurso[]=[];
-  filterRegistro:Recurso[]=[];
+  reservas: Reserva[]=[];
+  historiales: Historial[] = [];
+  filterHistorial:Historial[]=[];
+  filterReservas:Reserva[]=[];
+  columnFilters: { [key: string]: string } = {};
+  columns = ['id', 'usuario', 'tipo','descripcion','fechaInicio','fechaFin'];
   notification: { message: string; type: 'info' | 'success' | 'error' | 'warning'  } = {
     message: '',
     type: 'info'
   };
-  dataSource=new MatTableDataSource<Recurso>();
-  displayedColumns = ['id', 'usuario', 'tipo', 'recursos', 'fecha', 'horaInicio','horaFin','actions'];
-    @ViewChild(MatPaginator) paginator!:MatPaginator;
-  constructor(private recursoService:HistorialServiceService,private mydialog:MatDialog){
-    }
+  dataSource=new MatTableDataSource<Reserva>();
+  dataHistorial=new MatTableDataSource<Historial>();
+  ReservasColumns = ['id', 'usuario', 'tipo', 'descripcion', 'fechaInicio', 'fechaFin','estado','actions'];
+  HistorialColumns=['id', 'usuario', 'tipo', 'descripcion', 'fechaInicio', 'fechaFin','actions'];
+  filter = { id: '', usuario: '', tipo: '',descripcion:'',fechaInicio:'', fechaFin:''};
+  @ViewChild(MatPaginator) paginator!:MatPaginator;
+  @ViewChild('paginatorHistorial') paginatorHistorial!: MatPaginator;
+  constructor(private reservaService:ReservasServiceService,private mydialog:MatDialog,
+    private historialService:HistorialServiceService
+  ){}
   ngOnInit(): void {
-      this.getRegistro();
+      this.verReservas();
+      this.verHistorial();
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator=this.paginator;
+    this.dataHistorial.paginator = this.paginatorHistorial;
   }
-  getRegistro():void{
-    // this.recursoService.getHistorial().subscribe(
-    //   {
-    //     next:(data)=>{
-    //       this.registros=data;
-    //       this.filterRegistro=[...this.registros]
-    //     }
-    //   }
-    // )
+  verHistorial():void{
+    this.historialService.getHistorial().subscribe({
+      next:(data)=>{
+        this.historiales=data;
+        this.dataHistorial.data=this.historiales;
+      }
+    })
   }
-  // nuevo():void{
-  //   const dialogWind = this.mydialog.open(FormDialogComponent,{
-  //       width: '600px', // Ajusta el ancho
-  //       height: '400px', // Opcional: Ajusta la altura
-  //       maxWidth: '80vw', // Máximo ancho permitido (opcional)
-  //   })
-  //   dialogWind.afterClosed().subscribe((nuevoRegistro)=>{
-  //     if(nuevoRegistro){
-  //       this.recursoService.addRecurso(nuevoRegistro).subscribe((registro)=>{
-  //         this.registros.push(registro);
-  //       })
-  //     }
-  //   })
-  // }
-  eliminarRegistro(id:number):void{
-    const dialogRef =  this.mydialog.open(DialogComponent,{
+  verReservas():void{
+    this.reservaService.getReservas().subscribe({
+      next: (data) => {
+        this.reservas = data;
+        this.dataSource.data = this.reservas;
+      },
+    });
+  }
+  getEstadoClass(estado: 'PENDIENTE' | 'CONFIRMADA' | 'CANCELADA'): string {
+    switch (estado) {
+      case 'PENDIENTE':
+        return 'estado-pendiente';
+      case 'CONFIRMADA':
+        return 'estado-confirmada';
+      case 'CANCELADA':
+        return 'estado-cancelada';
+      default:
+        return '';
+    }
+  }
+  
+  nuevoRegistro(reserva: Reserva): void {
+    const historial: Historial = {
+      usuario: reserva.usuario,
+      tipo: reserva.tipo,
+      descripcion: reserva.descripcion,
+      fechaInicio: reserva.fechaInicio,
+      fechaFin: reserva.fechaFin,
+    };
+  
+    // Llamar al método para abrir el diálogo de confirmación
+    this.abrirDialogoConfirmacion('Confirmar Registro', '¿Está seguro de que desea guardar este registro?')
+      .subscribe(result => {
+        if (result) {
+          this.historialService.addHistorial(historial).subscribe(
+            (response) => {
+              this.notification = { message: 'Registro guardado exitosamente', type: 'success' };
+              this.actualizarTablaHisto(); // Actualizar tabla si es necesario
+              this.verHistorial();
+              // Desaparición automática de la notificación
+              setTimeout(() => {
+                this.notification = { message: '', type: 'info' };
+              }, 2000);
+            },
+            (error) => {
+              this.manejarError('Error al guardar el registro', error);
+            }
+          );
+        }
+      });
+  }
+  private abrirDialogoConfirmacion(titulo: string, mensaje: string): Observable<boolean> {
+    const dialogRef = this.mydialog.open(DialogComponent, {
+      data: { titulo, mensaje }
+    });
+    return dialogRef.afterClosed();
+  }
+  
+  private manejarError(message: string, error: any): void {
+    this.notification = { message, type: 'error' };
+    console.error(message, error);
+  }
+
+  eliminarRegistro(id: number): void {
+    const dialogRef = this.mydialog.open(DialogComponent, {
       data: {
-        titulo: "Eliminacion de pelicula",
-        mensaje: '¿Estas seguro de eliminar el registro?'
+        titulo: "Eliminar Registro",
+        mensaje: '¿Estás seguro de eliminar este registro?'
       }
     });
+  
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        console.log(result);
-        this.registros=this.recursoService.deleteRecurso(this.registros,id);
-        console.log(this.registros)
-        this.actualizarTabla();
-        this.notification={message:'Registro eliminado exitosamente',type:'error'}
+      if (result) {
         
+        this.historiales = this.historialService.deleteHistorial(this.historiales, id);
+        this.dataHistorial.data = [...this.historiales];
+        this.notification = { message: 'Registro eliminado exitosamente', type: 'success' };
         setTimeout(() => {
           this.notification = { message: '', type: 'info' };
         }, 2000);
       }
     });
   }
+  
 
-  actualizarTabla():void{
-    this.filterRegistro=[...this.registros];
+  actualizarTablaReservas():void{
+    this.filterReservas=[...this.reservas];
+  }
+  actualizarTablaHisto():void{
+    this.filterHistorial=[...this.historiales];
   }
 } 

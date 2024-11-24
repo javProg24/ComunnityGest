@@ -39,3 +39,65 @@ button.mat-icon-button {
     margin-left: 20px;
     margin-top: 30px;
 }
+/* estados */
+.estado-pendiente {
+    background-color: #ffeb3b; /* Amarillo */
+    color: #000;              /* Negro */
+  }
+  
+  .estado-confirmada {
+    background-color: #4caf50; /* Verde */
+    color: #fff;               /* Blanco */
+  }
+  
+  .estado-cancelada {
+    background-color: #f44336; /* Rojo */
+    color: #fff;               /* Blanco */
+  }
+
+  .notification {
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: opacity 0.5s ease-in-out;
+    max-width: 400px; /* Limita el ancho de la notificación */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    position: relative;
+    opacity: 1;
+}
+
+.notification.info {
+    background-color: #d9f7ff;
+    color: #007b7f;
+    border: 1px solid #007b7f;
+}
+
+.notification.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #155724;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #721c24;
+}
+/* cuadros de busqueda */
+.column-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .column-filters mat-form-field {
+    width: 150px; /* Ajusta el ancho de los campos de texto */
+  }
+  
+  mat-table {
+    margin-top: 20px;
+  }

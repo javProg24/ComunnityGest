@@ -1,68 +1,145 @@
 {
-    "usuario":[
-        {
-            "id": 1,
-            "nombre": "Carlos Andrade",
-            "correo": "carlos.andrade@outlook.com",
-            "telefono": "0985123456",
-            "activo": true
-          },
-          {
-            "id": 2,
-            "nombre": "Luis Enrique Sánchez",
-            "correo": "luis.sanchez@hotmail.com",
-            "telefono": "0983246789",
-            "activo": false
-          },
-          {
-            "id": 3,
-            "nombre": "Veronica Delgado",
-            "correo": "paola.delgado@yahoo.com",
-            "telefono": "0994578234",
-            "activo": true
-          },
-          {
-            "id": 4,
-            "nombre": "Natalia Gómez",
-            "correo": "natalia.gomez@icloud.com",
-            "telefono": "0976543210",
-            "activo": true
-          },
-          {
-            "id": 5,
-            "nombre": "Marco Díaz",
-            "correo": "Marco.diaz@live.com",
-            "telefono": "0941234567",
-            "activo": false
-          }
-    ],
-    "uso":[
-      
-    ],
-    "reporte":[
-
-    ],
-    "reservas": [
-      {
-        "id": 1,
-        "usuario": "Juan Pérez",
-        "tipo": "Instalacion",
-        "fechaInicio": "2024-06-15T10:00:00",
-        "fechaFin": "2024-06-15T12:00:00",
-        "estado": "PENDIENTE",
-        "descripcion": "Salón comunal para reunión"
-      },
-      {
-        "id": 2,
-        "usuario": "María Gómez",
-        "tipo": "Herramienta",
-        "fechaInicio": "2024-06-20T14:00:00",
-        "fechaFin": "2024-06-20T16:00:00", 
-        "estado": "CONFIRMADA",
-        "descripcion": "Uso de herramientas de jardinería"
-      }
-    ],
-    "herramientas": [
+  "usuario": [
+    {
+      "id": 1,
+      "nombre": "Carlos Andrade",
+      "correo": "carlos.andrade@outlook.com",
+      "telefono": "0985123456",
+      "activo": true
+    },
+    {
+      "id": 2,
+      "nombre": "Luis Enrique Sánchez",
+      "correo": "luis.sanchez@hotmail.com",
+      "telefono": "0983246789",
+      "activo": false
+    },
+    {
+      "id": 3,
+      "nombre": "Veronica Delgado",
+      "correo": "paola.delgado@yahoo.com",
+      "telefono": "0994578234",
+      "activo": true
+    },
+    {
+      "id": 4,
+      "nombre": "Natalia Gómez",
+      "correo": "natalia.gomez@icloud.com",
+      "telefono": "0976543210",
+      "activo": true
+    },
+    {
+      "id": 5,
+      "nombre": "Marco Díaz",
+      "correo": "Marco.diaz@live.com",
+      "telefono": "0941234567",
+      "activo": false
+    }
+  ],
+  "uso": [
+    {
+      "id": "9bb0",
+      "usuario": "Luis Enrique Sánchez",
+      "tipo": "Herramienta",
+      "descripcion": "Cortadora de Césped Eléctrica",
+      "fechaInicio": "2024-06-20T14:00:00",
+      "fechaFin": "2024-06-20T16:00:00"
+    },
+    {
+      "id": "a3bd",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
+    },
+    {
+      "id": "781d",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
+    },
+    {
+      "id": "6892",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
+    },
+    {
+      "id": "2b33",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
+    },
+    {
+      "id": "b027",
+      "usuario": "Luis Enrique Sánchez",
+      "tipo": "Herramienta",
+      "descripcion": "Cortadora de Césped Eléctrica",
+      "fechaInicio": "2024-06-20T14:00:00",
+      "fechaFin": "2024-06-20T16:00:00"
+    },
+    {
+      "id": "10ea",
+      "usuario": "Luis Enrique Sánchez",
+      "tipo": "Herramienta",
+      "descripcion": "Cortadora de Césped Eléctrica",
+      "fechaInicio": "2024-06-20T14:00:00",
+      "fechaFin": "2024-06-20T16:00:00"
+    },
+    {
+      "id": "67c8",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
+    },
+    {
+      "id": "b060",
+      "usuario": "Luis Enrique Sánchez",
+      "tipo": "Herramienta",
+      "descripcion": "Cortadora de Césped Eléctrica",
+      "fechaInicio": "2024-06-20T14:00:00",
+      "fechaFin": "2024-06-20T16:00:00"
+    },
+    {
+      "id": "e772",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
+    }
+  ],
+  "reporte": [],
+  "reservas": [
+    {
+      "id": 1,
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00",
+      "estado": "PENDIENTE",
+      "descripcion": "Salón comunal"
+    },
+    {
+      "id": 2,
+      "usuario": "Luis Enrique Sánchez",
+      "tipo": "Herramienta",
+      "fechaInicio": "2024-06-20T14:00:00",
+      "fechaFin": "2024-06-20T16:00:00",
+      "estado": "CONFIRMADA",
+      "descripcion": "Cortadora de Césped Eléctrica"
+    }
+  ],
+  "herramientas": [
     {
       "id": 1,
       "nombre": "Cortadora de Césped Eléctrica",
@@ -92,7 +169,7 @@
       "descripcion": "Escalera de aluminio, ideal para trabajos de jardinería y mantenimiento."
     }
   ],
-    "instalaciones": [
+  "instalaciones": [
     {
       "id": 1,
       "nombre": "Salón Comunal A",
@@ -122,60 +199,60 @@
       "horarioDisponible": "Lunes a Viernes, de 6:00 AM a 9:00 PM"
     }
   ],
-    "integrante":[
-        {
-            "id":1,
-            "nombre": "Javier",
-            "apellido": "Tomala Gonzalez",
-            "foto": "../image/Tomala.jpeg",
-            "link": "https://github.com/javProg24",
-            "numero": 9667182694,
-            "rol":""
-        },
-        {
-            "id":2,
-            "nombre": "Pedro", 
-            "apellido":"Aviles Martinez", 
-            "foto": "../image/Aviles.png", 
-            "link": "https://github.com/Peter16Xo", 
-            "numero": 946593534,
-            "rol":""
-        },
-        {
-            "id":3,
-            "nombre": "Jean",
-            "apellido":"Romero Serrano", 
-            "foto": "../image/Romero.jpeg", 
-            "link": "https://github.com/JMarco20", 
-            "numero": 954456734,
-            "rol":""
-        },
-        {
-            "id":4,
-            "nombre": "Marcos",
-            "apellido": "Falconni Caiza", 
-            "foto": "../image/Falconni.jpeg", 
-            "link": "https://github.com/FalconMarc", 
-            "numero": 945643578,
-            "rol":""
-        },
-        {
-            "id":5,
-            "nombre": "Steven", 
-            "apellido": "Falquez Lopez", 
-            "foto": "../image/Falquez.png", 
-            "link": "https://github.com/ING-DAVID-777",
-            "numero": 945678534,
-            "rol":""
-        },
-        {
-            "id":6,
-            "nombre": "Desconocido", 
-            "apellido": "apellidos", 
-            "foto": "../image/default.png", 
-            "link": "#",  
-            "numero": 906330537,
-            "rol":""
-        }
-    ]
+  "integrante": [
+    {
+      "id": 1,
+      "nombre": "Javier",
+      "apellido": "Tomala Gonzalez",
+      "foto": "../image/Tomala.jpeg",
+      "link": "https://github.com/javProg24",
+      "numero": 9667182694,
+      "rol": ""
+    },
+    {
+      "id": 2,
+      "nombre": "Pedro",
+      "apellido": "Aviles Martinez",
+      "foto": "../image/Aviles.png",
+      "link": "https://github.com/Peter16Xo",
+      "numero": 946593534,
+      "rol": ""
+    },
+    {
+      "id": 3,
+      "nombre": "Jean",
+      "apellido": "Romero Serrano",
+      "foto": "../image/Romero.jpeg",
+      "link": "https://github.com/JMarco20",
+      "numero": 954456734,
+      "rol": ""
+    },
+    {
+      "id": 4,
+      "nombre": "Marcos",
+      "apellido": "Falconni Caiza",
+      "foto": "../image/Falconni.jpeg",
+      "link": "https://github.com/FalconMarc",
+      "numero": 945643578,
+      "rol": ""
+    },
+    {
+      "id": 5,
+      "nombre": "Steven",
+      "apellido": "Falquez Lopez",
+      "foto": "../image/Falquez.png",
+      "link": "https://github.com/ING-DAVID-777",
+      "numero": 945678534,
+      "rol": ""
+    },
+    {
+      "id": 6,
+      "nombre": "Desconocido",
+      "apellido": "apellidos",
+      "foto": "../image/default.png",
+      "link": "#",
+      "numero": 906330537,
+      "rol": ""
+    }
+  ]
 }

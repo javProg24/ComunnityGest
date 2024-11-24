@@ -1,27 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Recurso } from '../../models/historial.model';
+import { Historial } from '../../models/historial.model';
 import { Observable } from 'rxjs';
+import { ReservasServiceService } from '../reservas-services/reservas.service.service';
+import { Reserva } from '../../models/reservas.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HistorialServiceService {
-  // private jsonUrl="http://localhost:3000/uso";
-  constructor(private http:HttpClient) { }
-  // getHistorial():Observable<Recurso[]>{
-  //   return this.http.get<Recurso[]>(this.jsonUrl);
-  // }
-  // addRecurso(recurso:Recurso):Observable<Recurso>{
-  //   return this.http.post<Recurso>(this.jsonUrl,recurso);
-  // }
+  private jsonUrl="http://localhost:3000/uso";
+  constructor(private http:HttpClient,private servicioReserva:ReservasServiceService) { }
+  getHistorial():Observable<Historial[]>{
+    return this.http.get<Historial[]>(this.jsonUrl);
+  }
+  //guardar historial
+  addHistorial(recurso:Historial):Observable<Historial>{
+    return this.http.post<Historial>(this.jsonUrl,recurso);
+  }
   // eliminar
-  deleteRecurso(recurso:Recurso[],id:number):Recurso[]{
+  deleteHistorial(recurso:Historial[],id:number):Historial[]{
     return recurso.filter(recurso=>recurso.id!==id)
   }
-  // updateRecurso(recurso:Recurso){
+  // buscar por usuario
+  searchRegisterUser(){
 
-  // }
-
+  }
   
 }
