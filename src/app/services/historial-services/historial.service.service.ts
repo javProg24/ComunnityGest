@@ -7,19 +7,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HistorialServiceService {
-  private jsonUrl="http://localhost:3000/uso";
+  // private jsonUrl="http://localhost:3000/uso";
   constructor(private http:HttpClient) { }
-  getHistorial():Observable<Recurso[]>{
-    return this.http.get<Recurso[]>(this.jsonUrl);
-  }
-  addRecurso(recurso:Recurso):Observable<Recurso>{
-    return this.http.post<Recurso>(this.jsonUrl,recurso);
-  }
+  // getHistorial():Observable<Recurso[]>{
+  //   return this.http.get<Recurso[]>(this.jsonUrl);
+  // }
+  // addRecurso(recurso:Recurso):Observable<Recurso>{
+  //   return this.http.post<Recurso>(this.jsonUrl,recurso);
+  // }
   // eliminar
   deleteRecurso(recurso:Recurso[],id:number):Recurso[]{
     return recurso.filter(recurso=>recurso.id!==id)
   }
-  updateRecurso(recurso:Recurso){
+  // updateRecurso(recurso:Recurso){
 
-  }
+  // }
+
+  
 }

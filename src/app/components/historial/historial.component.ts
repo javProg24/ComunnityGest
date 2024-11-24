@@ -69,29 +69,29 @@ export class HistorialComponent implements OnInit, AfterViewInit{
     this.dataSource.paginator=this.paginator;
   }
   getRegistro():void{
-    this.recursoService.getHistorial().subscribe(
-      {
-        next:(data)=>{
-          this.registros=data;
-          this.filterRegistro=[...this.registros]
-        }
-      }
-    )
+    // this.recursoService.getHistorial().subscribe(
+    //   {
+    //     next:(data)=>{
+    //       this.registros=data;
+    //       this.filterRegistro=[...this.registros]
+    //     }
+    //   }
+    // )
   }
-  nuevo():void{
-    const dialogWind = this.mydialog.open(FormDialogComponent,{
-        width: '600px', // Ajusta el ancho
-        height: '400px', // Opcional: Ajusta la altura
-        maxWidth: '80vw', // Máximo ancho permitido (opcional)
-    })
-    dialogWind.afterClosed().subscribe((nuevoRegistro)=>{
-      if(nuevoRegistro){
-        this.recursoService.addRecurso(nuevoRegistro).subscribe((registro)=>{
-          this.registros.push(registro);
-        })
-      }
-    })
-  }
+  // nuevo():void{
+  //   const dialogWind = this.mydialog.open(FormDialogComponent,{
+  //       width: '600px', // Ajusta el ancho
+  //       height: '400px', // Opcional: Ajusta la altura
+  //       maxWidth: '80vw', // Máximo ancho permitido (opcional)
+  //   })
+  //   dialogWind.afterClosed().subscribe((nuevoRegistro)=>{
+  //     if(nuevoRegistro){
+  //       this.recursoService.addRecurso(nuevoRegistro).subscribe((registro)=>{
+  //         this.registros.push(registro);
+  //       })
+  //     }
+  //   })
+  // }
   eliminarRegistro(id:number):void{
     const dialogRef =  this.mydialog.open(DialogComponent,{
       data: {
