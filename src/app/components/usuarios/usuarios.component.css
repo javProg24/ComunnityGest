@@ -1,87 +1,101 @@
-/* Contenedor principal */
 .container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 24px;
   padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+.main-title {
+  text-align: center;
+  font-size: 32px;
+  color: #1aa36a;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 16px;
+}
+
 .form-section mat-card {
-  padding: 15px; 
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #dff0de;
 }
 
-/* Sección del formulario */
-.form-section {
-  flex: 1 1 calc(50% - 24px); 
-}
-
-.full-width {
+.form-field {
+  margin-bottom: 16px;
   width: 100%;
 }
-/*Contenedores*/
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  margin-top: 16px;
-  gap: 8px;
-  padding-left: 8px; 
-}
 
-/*Boton Agregar*/
-button[type="submit"] {
-  margin-top: 16px;
-  margin-right: 16px;
-  margin-bottom: 16px;
+.submit-button {
   display: block;
   margin-left: auto;
+  margin-top: 16px;
+  transition: transform 0.2s, background-color 0.3s;
 }
 
-
-/* Sección de búsqueda */
-.search-container {
-  width: 100%;
-  margin-bottom: 16px;
+.submit-button:hover {
+  background-color: #1976d2;
+  transform: scale(1.05);
 }
 
-/* Tabla de usuarios */
-.table-section {
-  flex: 1 1 100%; 
+.search-field {
+  width: 50%; 
+  margin: 0 auto;
 }
 
-.mat-elevation-z8 {
-  border-radius: 8px;
-  overflow: hidden;
+.table-container {
+  padding: 16px;
+  background-color: rgb(226, 252, 212);
 }
 
-.mat-header-row,
-.mat-row {
-  display: flex;
-  align-items: center;
+.mat-header-cell {
+  background-color: #e3f2fd;
+  color: #000;
+  font-weight: bold;
 }
 
-.mat-header-cell,
 .mat-cell {
-  padding: 8px 16px;
-  text-align: left;
+  background-color: #ffffff;
 }
 
-/* Estilos para columnas específicas */
-.activo {
+.edit-button {
   color: #4caf50;
-  font-weight: bold;
 }
 
-.inactivo {
+.delete-button {
   color: #f44336;
-  font-weight: bold;
 }
 
-/* Botones de acciones */
-button.mat-icon-button {
-  margin-right: 8px;
-  display: inline-flex;
-  align-items: center;
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.mat-icon {
-  font-size: 20px;
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-in-out;
 }
