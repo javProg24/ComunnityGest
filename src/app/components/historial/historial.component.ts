@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe, NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule, } from '@angular/material/button';
@@ -17,11 +17,9 @@ import { Reserva } from '../../models/reservas.model';
 import { Historial } from '../../models/historial.model';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Observable } from 'rxjs';
 import { MatNativeDateModule, MatOption, MatOptionModule, NativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker'
-import { FormDialogComponent } from '../shared/form-dialog/form-dialog.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Usuario } from '../../models/usuarios.model';
 import { UsuariosService } from '../../services/usuarios-services/usuarios.service.service';
@@ -56,7 +54,8 @@ export class HistorialComponent implements OnInit, AfterViewInit{
     message: '',type: 'info'
   };
   tipos = [
-    { value: 'Instalacion', label: 'Instalación' },{ value: 'Herramienta', label: 'Herramienta' }
+    { value: 'Instalacion', label: 'Instalacion' },
+    { value: 'Herramienta', label: 'Herramienta' }
   ];
   dataSource=new MatTableDataSource<Reserva>();
   dataHistorial=new MatTableDataSource<Historial>();
@@ -72,7 +71,7 @@ export class HistorialComponent implements OnInit, AfterViewInit{
       this.verHistorial();
       this.formulario = this.fb.group({
         usuario: ['',], 
-        tipo: ['',],    
+        tipo: ['',[Validators.required]],    
         descripcion: ['',], 
         fechaInicio: [null,],
         fechaFin: [null,],   
@@ -157,11 +156,11 @@ export class HistorialComponent implements OnInit, AfterViewInit{
   nombres: string[] = [];
   obtener(tipo:string):void{
     this.tipoSeleccionado = tipo;
-    if(tipo=='i'){
+    if(tipo=='I'){
       this.serviceInstala.getNombres().subscribe(nombres=>{
         this.nombres = nombres;
       })
-    }else if(tipo=='h'){
+    }else if(tipo=='H'){
       this.serviceHerra.getNombres().subscribe(nombres=>{
         this.nombres=nombres;
       })
@@ -180,7 +179,8 @@ export class HistorialComponent implements OnInit, AfterViewInit{
         // Maneja los resultados
         this.dataHistorial.data=datos;
       });
+    }else{
+      this.verHistorial();
     }
   }
-  
 } 

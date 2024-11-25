@@ -15,13 +15,20 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../shared/dialog/dialog.component';
+import { MatOptionModule } from '@angular/material/core';
 
 
 @Component({
   selector: 'app-reportes',
-  imports: [MatFormField, MatError, MatLabel, MatTable, MatHeaderCell, MatCell, MatRow, MatHeaderRow, ReactiveFormsModule,
-     CommonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule,MatTableModule, MatIconModule, MatDividerModule,
-    MatOption, MatRadioGroup, MatRadioButton],
+  imports: [MatFormField,MatLabel, 
+            MatTable, MatHeaderCell, 
+            MatCell, MatRow, 
+            MatHeaderRow, ReactiveFormsModule,
+            CommonModule, MatCardModule, 
+            MatFormFieldModule, MatInputModule, 
+            MatButtonModule, MatCheckboxModule,
+            MatTableModule, MatIconModule, MatDividerModule,
+            MatOptionModule, MatRadioGroup, MatRadioButton],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css'
 })
