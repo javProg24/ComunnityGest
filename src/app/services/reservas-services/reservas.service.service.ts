@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Reserva } from '../../models/reservas.model';
@@ -8,7 +8,8 @@ import { Reserva } from '../../models/reservas.model';
   providedIn: 'root'
 })
 export class ReservasService {
-  private jsonUrl = "http://localhost:3000/reservas";
+
+  private jsonUrl = 'http://localhost:3000/reservas';
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +20,7 @@ export class ReservasService {
     );
   }
 
-  // Obtener una reserva por ID (puedes implementar un endpoint en tu API si usas uno real)
+  // Obtener una reserva por ID
   getReservaById(id: number): Observable<Reserva> {
     const url = `${this.jsonUrl}/${id}`;
     return this.http.get<Reserva>(url).pipe(
@@ -34,7 +35,7 @@ export class ReservasService {
     );
   }
 
-  // Actualizar una nueva reserva
+  // Actualizar una reserva existente
   actualizarReserva(id: number, reserva: Reserva): Observable<Reserva> {
     const url = `${this.jsonUrl}/${id}`;
     return this.http.put<Reserva>(url, reserva).pipe(
@@ -42,7 +43,7 @@ export class ReservasService {
     );
   }
 
-  // Eliminar una nueva reserva
+  // Eliminar una reserva
   eliminarReserva(id: number): Observable<void> {
     const url = `${this.jsonUrl}/${id}`;
     return this.http.delete<void>(url).pipe(
@@ -55,4 +56,5 @@ export class ReservasService {
     console.error('Error en el servicio', error);
     return throwError('Ocurrió un error en la solicitud, intenta de nuevo más tarde.');
   }
+
 }
