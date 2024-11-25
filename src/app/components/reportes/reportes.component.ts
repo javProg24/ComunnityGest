@@ -12,17 +12,16 @@ import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { NotificationsComponent } from '../utils/notifications/notifications.component';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MydialogComponent } from '../utils/mydialog/mydialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../shared/dialog/dialog.component';
 
 
 @Component({
   selector: 'app-reportes',
   imports: [MatFormField, MatError, MatLabel, MatTable, MatHeaderCell, MatCell, MatRow, MatHeaderRow, ReactiveFormsModule,
      CommonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule,MatTableModule, MatIconModule, MatDividerModule,
-    NotificationsComponent, MatOption, MatRadioGroup, MatRadioButton],
+    MatOption, MatRadioGroup, MatRadioButton],
   templateUrl: './reportes.component.html',
   styleUrl: './reportes.component.css'
 })
@@ -103,7 +102,7 @@ export class ReportesComponent implements OnInit, AfterViewInit{
   delete(reporte: Reporte){
 
 
-      const dialogRef = this.mydialog.open(MydialogComponent,{
+      const dialogRef = this.mydialog.open(DialogComponent,{
         data:{
           titulo: "Esta seguro de eliminar el reporte?",
         },
