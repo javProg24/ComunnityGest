@@ -8,7 +8,7 @@ import { Reserva } from '../../models/reservas.model';
   providedIn: 'root'
 })
 export class ReservasService {
-  private jsonUrl = "../json/reservas.json";
+  private jsonUrl = "http://localhost:3000/reservas";
 
   constructor(private http: HttpClient) { }
 
@@ -34,7 +34,7 @@ export class ReservasService {
     );
   }
 
-  // Actualizar una reserva existente
+  // Actualizar una nueva reserva
   actualizarReserva(id: number, reserva: Reserva): Observable<Reserva> {
     const url = `${this.jsonUrl}/${id}`;
     return this.http.put<Reserva>(url, reserva).pipe(
@@ -42,7 +42,7 @@ export class ReservasService {
     );
   }
 
-  // Eliminar una reserva
+  // Eliminar una nueva reserva
   eliminarReserva(id: number): Observable<void> {
     const url = `${this.jsonUrl}/${id}`;
     return this.http.delete<void>(url).pipe(

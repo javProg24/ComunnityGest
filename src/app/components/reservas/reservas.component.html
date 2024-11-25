@@ -1,102 +1,120 @@
-<mat-card>
-  <mat-card-title>Gestión de Reservas</mat-card-title>
-  <mat-card-content>
-    <!-- Formulario de Reserva -->
-    <form [formGroup]="reservasForm" class="form-container">
-      <mat-form-field appearance="fill">
-        <mat-label>Usuario</mat-label>
-        <input matInput formControlName="usuario" placeholder="Nombre del usuario">
-      </mat-form-field>
+<div class="container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>{{ modoEdicion ? 'Editar Reserva' : 'Nueva Reserva' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="reservasForm" (ngSubmit)="modoEdicion ? actualizarReserva() : crearReserva()">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input matInput formControlName="usuario" placeholder="Ingrese el usuario">
+            <mat-error *ngIf="reservasForm.get('usuario')?.hasError('required')">
+              El usuario es requerido
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Tipo</mat-label>
-        <input matInput formControlName="tipo" placeholder="Tipo de reserva">
-      </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo</mat-label>
+            <input matInput formControlName="tipo" placeholder="Ingrese el tipo">
+            <mat-error *ngIf="reservasForm.get('tipo')?.hasError('required')">
+              El tipo es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Fecha Inicio</mat-label>
-        <input matInput type="datetime-local" formControlName="fechaInicio">
-      </mat-form-field>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha Inicio</mat-label>
+            <input matInput type="datetime-local" formControlName="fechaInicio">
+            <mat-error *ngIf="reservasForm.get('fechaInicio')?.hasError('required')">
+              La fecha de inicio es requerida
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Fecha Fin</mat-label>
-        <input matInput type="datetime-local" formControlName="fechaFin">
-      </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha Fin</mat-label>
+            <input matInput type="datetime-local" formControlName="fechaFin">
+            <mat-error *ngIf="reservasForm.get('fechaFin')?.hasError('required')">
+              La fecha de fin es requerida
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Estado</mat-label>
-        <select matNativeSelect formControlName="estado">
-          <option *ngFor="let estado of estadosReserva" [value]="estado.valor">
-            {{estado.texto}}
-          </option>
-        </select>
-      </mat-form-field>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <select matNativeControl formControlName="estado">
+              <option *ngFor="let estado of estadosReserva" [value]="estado.valor">
+                {{estado.texto}}
+              </option>
+            </select>
+          </mat-form-field>
+        </div>
 
-      <div class="button-container">
-        <button mat-raised-button color="primary" *ngIf="!modoEdicion" (click)="crearReserva()">
-          <mat-icon>add</mat-icon> Crear Reserva
-        </button>
-        <button mat-raised-button color="accent" *ngIf="modoEdicion" (click)="actualizarReserva()">
-          <mat-icon>save</mat-icon> Actualizar Reserva
-        </button>
-        <button mat-raised-button color="warn" *ngIf="modoEdicion" (click)="cancelarEdicion()">
-          <mat-icon>cancel</mat-icon> Cancelar
-        </button>
-      </div>
-    </form>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!reservasForm.valid">
+            {{ modoEdicion ? 'Actualizar' : 'Crear' }}
+          </button>
+          <button mat-button type="button" *ngIf="modoEdicion" (click)="cancelarEdicion()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
-    <!-- Contenedor de Búsqueda -->
-    <div class="actions-container">
-      <mat-form-field appearance="fill" class="search-field">
-        <mat-label>Buscar reserva</mat-label>
-        <input matInput formControlName="filtro" placeholder="Buscar por usuario, tipo o estado">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </div>
+  <div class="filtro-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Filtrar reservas</mat-label>
+      <input matInput ="filtro" placeholder="Buscar por usuario, tipo o estado">
+      <button mat-icon-button matSuffix *ngIf="filtro" (click)="filtro=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
 
-    <!-- Tabla de Reservas -->
+  <div class="tabla-container">
     <table mat-table [dataSource]="buscarReservas()" class="mat-elevation-z8">
       <ng-container matColumnDef="usuario">
-        <th mat-header-cell *matHeaderCellDef>Usuario</th>
-        <td mat-cell *matCellDef="let reserva">{{reserva.usuario}}</td>
+        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+        <td mat-cell *matCellDef="let reserva"> {{reserva.usuario}} </td>
       </ng-container>
 
       <ng-container matColumnDef="tipo">
-        <th mat-header-cell *matHeaderCellDef>Tipo</th>
-        <td mat-cell *matCellDef="let reserva">{{reserva.tipo}}</td>
+        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+        <td mat-cell *matCellDef="let reserva"> {{reserva.tipo}} </td>
       </ng-container>
 
       <ng-container matColumnDef="fechaInicio">
-        <th mat-header-cell *matHeaderCellDef>Fecha Inicio</th>
-        <td mat-cell *matCellDef="let reserva">{{reserva.fechaInicio | date:'short'}}</td>
+        <th mat-header-cell *matHeaderCellDef> Fecha Inicio </th>
+        <td mat-cell *matCellDef="let reserva"> {{reserva.fechaInicio | date:'short'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="fechaFin">
-        <th mat-header-cell *matHeaderCellDef>Fecha Fin</th>
-        <td mat-cell *matCellDef="let reserva">{{reserva.fechaFin | date:'short'}}</td>
+        <th mat-header-cell *matHeaderCellDef> Fecha Fin </th>
+        <td mat-cell *matCellDef="let reserva"> {{reserva.fechaFin | date:'short'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="estado">
-        <th mat-header-cell *matHeaderCellDef>Estado</th>
-        <td mat-cell *matCellDef="let reserva">{{reserva.estado}}</td>
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let reserva"> {{reserva.estado}} </td>
       </ng-container>
 
       <ng-container matColumnDef="acciones">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let reserva">
-          <div class="acciones-buttons-container">
-            <button mat-icon-button color="primary" matTooltip="Editar reserva" (click)="editarReserva(reserva)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" matTooltip="Eliminar reserva" (click)="eliminarReserva(reserva.id)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
+          <button mat-icon-button color="primary" (click)="editarReserva(reserva)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminarReserva(reserva.id!)" matTooltip="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
     </table>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
