@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +13,11 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { Reserva } from '../../models/reservas.model';
 import { ReservasService } from '../../services/reservas-services/reservas.service.service';
+import { InstalacionesServiceService } from '../../services/instalaciones-services/instalaciones.service.service';
+import { HerramientaServiceService } from '../../services/herramientas-services/herramienta.service.service';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-reservas',
@@ -29,28 +34,33 @@ import { ReservasService } from '../../services/reservas-services/reservas.servi
     MatInputModule,
     MatCardModule,
     MatIcon,
-    MatButton
+    MatButton,MatOptionModule,MatSelectModule,MatPaginatorModule
   ],
   templateUrl: './reservas.component.html',
   styleUrls: ['./reservas.component.css']
 })
-export class ReservasComponent implements OnInit {
+export class ReservasComponent implements OnInit,AfterViewInit {
+  dataSource=new MatTableDataSource<Reserva>();
   reservasForm: FormGroup;
   reservas: Reserva[] = [];
-  columnas: string[] = ['usuario', 'tipo', 'fechaInicio', 'fechaFin', 'estado', 'acciones'];
+  columnas: string[] = ['usuario', 'tipo', 'descripcion','fechaInicio', 'fechaFin', 'estado', 'acciones'];
   filtro: string = '';
   modoEdicion = false;
   reservaSeleccionada: Reserva | null = null;
-
+  tipos = [
+    { value: 'i', label: 'Instalación' },{ value: 'h', label: 'Herramienta' }
+  ];
   estadosReserva = [
     { valor: 'PENDIENTE', texto: 'Pendiente' },
     { valor: 'CONFIRMADA', texto: 'Confirmada' },
     { valor: 'CANCELADA', texto: 'Cancelada' }
   ];
-
+  @ViewChild(MatPaginator) paginator!:MatPaginator;
   constructor(
     private fb: FormBuilder,
     private reservasService: ReservasService,
+    private serviceInstala:InstalacionesServiceService,
+    private serviceHerr:HerramientaServiceService
   ) {
     this.reservasForm = this.fb.group({
       usuario: ['', Validators.required],
@@ -59,6 +69,9 @@ export class ReservasComponent implements OnInit {
       fechaFin: ['', Validators.required],
       estado: ['PENDIENTE', Validators.required]
     });
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator=this.paginator;
   }
 
   ngOnInit() {
@@ -70,10 +83,16 @@ export class ReservasComponent implements OnInit {
   }
 
   // Buscar reservas
-  buscarReservas(): void {
-    this.reservas = this.reservas.filter(reserva => reserva.usuario.toLowerCase().includes(this.filtro.toLowerCase()) || reserva.tipo.toString().includes(this.filtro.toLowerCase()) || reserva.estado.toLowerCase().includes(this.filtro.toLowerCase()));
+  // buscarReservas(): void {
+  //   this.reservas = this.reservas.filter(reserva => reserva.usuario.toLowerCase().includes(this.filtro.toLowerCase()) || reserva.tipo.toString().includes(this.filtro.toLowerCase()) || reserva.estado.toLowerCase().includes(this.filtro.toLowerCase()));
+  // }
+  buscarReservas(searchInput: HTMLInputElement){
+    if(searchInput.value){
+      this.reservasService.getReservaSearch(searchInput.value).subscribe((datos)=>{
+        this.reservas = datos;
+      })
+    }
   }
-
   crearReserva(): void {
     if (this.reservasForm.valid) {
       const nuevaReserva: Reserva = this.reservasForm.value;
@@ -115,5 +134,18 @@ export class ReservasComponent implements OnInit {
     this.reservaSeleccionada = null;
     this.reservasForm.reset();
   }
-
+  tipoSeleccionado: string='';
+  nombres: string[] = [];
+  obtener(tipo:string):void{
+    this.tipoSeleccionado = tipo;
+    if(tipo=='i'){
+      this.serviceInstala.getNombres().subscribe(nombres=>{
+        this.nombres = nombres;
+      })
+    }else if(tipo=='h'){
+      this.serviceHerr.getNombres().subscribe(nombres=>{
+        this.nombres=nombres;
+      })
+    }
+  }
 }

@@ -1,20 +1,20 @@
 /* Contenedor principal */
 .table-container {
-    margin: 20px auto; /* Espaciado vertical de 20px y centrado horizontal */
-    padding: 0 20px; /* Espaciado interno a los lados (izquierda y derecha) */
+    margin: 20px auto; 
+    padding: 0 20px; 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra todo horizontalmente */
-    text-align: center; /* Centra texto */
-    gap: 20px; /* Espaciado entre el título, notificaciones y la tabla */
+    align-items: center; 
+    text-align: center; 
+    gap: 20px; 
   }
 /* Tabla */
 .centered-table {
-    width: 100%; /* La tabla ocupará todo el ancho disponible */
-    max-width: 1200px; /* Tamaño máximo para limitar su ancho */
-    border-radius: 8px; /* Bordes redondeados */
-    overflow: hidden; /* Oculta contenido desbordado */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra opcional para un mejor diseño */
+    width: 100%; 
+    max-width: 1200px; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 mat-header-row,
 mat-row {

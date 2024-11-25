@@ -5,5 +5,5 @@ export interface Reserva {
     fechaInicio: Date;
     fechaFin: Date;
     estado: string;
-    descripcion?: string;
+    descripcion: string;
   }

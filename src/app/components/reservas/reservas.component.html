@@ -16,7 +16,13 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Tipo</mat-label>
-            <input matInput formControlName="tipo" placeholder="Ingrese el tipo">
+                <mat-select formControlName="tipo"
+                (selectionChange)="obtener($event.value)">
+                  <mat-option value="" disabled>Seleccione...</mat-option>
+                  <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+                    {{ tipo.label }}
+                  </mat-option>
+                </mat-select>
             <mat-error *ngIf="reservasForm.get('tipo')?.hasError('required')">
               El tipo es requerido
             </mat-error>
@@ -43,6 +49,16 @@
 
         <div class="form-row">
           <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <mat-select formControlName="descripcion">
+              <mat-option value="" disabled>Seleccione...</mat-option>
+              <mat-option *ngFor="let nombre of nombres" [value]="nombre">
+                {{nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
             <mat-label>Estado</mat-label>
             <select matNativeControl formControlName="estado">
               <option *ngFor="let estado of estadosReserva" [value]="estado.valor">
@@ -66,16 +82,19 @@
 
   <div class="filtro-container">
     <mat-form-field appearance="outline">
-      <mat-label>Filtrar reservas</mat-label>
+      <!-- <mat-label>Filtrar reservas</mat-label>
       <input matInput ="filtro" placeholder="Buscar por usuario, tipo o estado">
       <button mat-icon-button matSuffix *ngIf="filtro" (click)="filtro=''">
         <mat-icon>close</mat-icon>
-      </button>
+      </button> -->
+      <mat-label>Buscar: </mat-label>
+      <input matInput type="search" placeholder="Buscar por usuario, tipo o estado"
+      #searchInput (keyup)="buscarReservas(searchInput)">
     </mat-form-field>
   </div>
 
   <div class="tabla-container">
-    <table mat-table ="buscarReservas()" class="mat-elevation-z8">
+    <mat-table [dataSource]="reservas" class="mat-elevation-z8 centered-table">
       <ng-container matColumnDef="usuario">
         <th mat-header-cell *matHeaderCellDef> Usuario </th>
         <td mat-cell *matCellDef="let reserva"> {{reserva.usuario}} </td>
@@ -84,6 +103,11 @@
       <ng-container matColumnDef="tipo">
         <th mat-header-cell *matHeaderCellDef> Tipo </th>
         <td mat-cell *matCellDef="let reserva"> {{reserva.tipo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+        <td mat-cell *matCellDef="let historial"> {{historial.descripcion}} </td>
       </ng-container>
 
       <ng-container matColumnDef="fechaInicio">
@@ -115,6 +139,8 @@
 
       <tr mat-header-row *matHeaderRowDef="columnas"></tr>
       <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
-    </table>
+    </mat-table>
+    <mat-paginator [length]="200" [pageSizeOptions]="[10, 7, 20]" aria-label="Select page" showFirstLastButtons>
+    </mat-paginator>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Reserva } from '../../models/reservas.model';
 
 @Injectable({
@@ -56,5 +56,17 @@ export class ReservasService {
     console.error('Error en el servicio', error);
     return throwError('Ocurrió un error en la solicitud, intenta de nuevo más tarde.');
   }
-
+  getReservaSearch(usuario?:string,tipo?:string,estado?:string):Observable<Reserva[]>{
+    return this.http.get<Reserva[]>(this.jsonUrl).pipe(
+      map((reservas)=>
+        reservas.filter((reserva)=>
+          (usuario? reserva.usuario.toLowerCase().includes(usuario.toLowerCase()):true)
+          &&
+          (tipo? reserva.tipo.toLowerCase().includes(tipo.toLowerCase()):true)
+          &&
+          (estado? reserva.estado.toLowerCase().includes(estado.toLowerCase()):true)
+        )
+      )
+    )
+  }
 }

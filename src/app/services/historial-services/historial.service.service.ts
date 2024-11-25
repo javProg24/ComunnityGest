@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Historial } from '../../models/historial.model';
 import { map, Observable } from 'rxjs';
-import { ReservasServiceService } from '../reservas-services/reservas.service.service';
 import { Reserva } from '../../models/reservas.model';
 import { ObserversModule } from '@angular/cdk/observers';
 
@@ -42,15 +41,15 @@ export class HistorialServiceService {
       )
     )
   }
-  getDescriptionSearch(descripcion?:string):Observable<Historial[]>{
-    return this.http.get<Historial[]>(this.jsonUrl).pipe(
-      map((historial)=>
-        historial.filter((history)=>
-          descripcion? history.descripcion.toLowerCase().includes(descripcion.toLowerCase()):true
-        )
-      )
-    )
-  }
+  // getDescriptionSearch(descripcion?:string):Observable<Historial[]>{
+  //   return this.http.get<Historial[]>(this.jsonUrl).pipe(
+  //     map((historial)=>
+  //       historial.filter((history)=>
+  //         descripcion? history.descripcion.toLowerCase().includes(descripcion.toLowerCase()):true
+  //       )
+  //     )
+  //   )
+  // }
   getDateStartSearch(fechaInicio?:string):Observable<Historial[]>{
     return this.http.get<Historial[]>(this.jsonUrl).pipe(
       map((historial)=>
@@ -83,7 +82,7 @@ export class HistorialServiceService {
           return (
             (usuario ? historial.usuario.toLowerCase().includes(usuario.toLowerCase()) : true) &&
             (tipo ? historial.tipo.toLowerCase().includes(tipo.toLowerCase()) : true) &&
-            (descripcion ? historial.descripcion.toLowerCase().includes(descripcion.toLowerCase()) : true) &&
+            // (descripcion ? historial.descripcion.toLowerCase().includes(descripcion.toLowerCase()) : true) &&
             (fechaInicio ? historial.fechaInicio.toISOString().includes(fechaInicio.toISOString()) : true) &&
             (fechaFin ? historial.fechaFin.toISOString().includes(fechaFin.toISOString()) : true)
           );

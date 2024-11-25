@@ -13,7 +13,6 @@ import { DialogComponent } from '../shared/dialog/dialog.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
-import { ReservasServiceService } from '../../services/reservas-services/reservas.service.service';
 import { Reserva } from '../../models/reservas.model';
 import { Historial } from '../../models/historial.model';
 import { MatMenuModule } from '@angular/material/menu';
@@ -28,6 +27,7 @@ import { Usuario } from '../../models/usuarios.model';
 import { UsuariosService } from '../../services/usuarios-services/usuarios.service.service';
 import { HerramientaServiceService } from '../../services/herramientas-services/herramienta.service.service';
 import { InstalacionesServiceService } from '../../services/instalaciones-services/instalaciones.service.service';
+import { ReservasService } from '../../services/reservas-services/reservas.service.service';
 @Component({
   selector: 'app-historial',
   standalone: true,
@@ -63,7 +63,7 @@ export class HistorialComponent implements OnInit, AfterViewInit{
   formulario!:FormGroup;
   @ViewChild(MatPaginator) paginator!:MatPaginator;
   @ViewChild('paginatorHistorial') paginatorHistorial!: MatPaginator;
-  constructor(private reservaService:ReservasServiceService,private mydialog:MatDialog,
+  constructor(private reservaService:ReservasService,private mydialog:MatDialog,
     private historialService:HistorialServiceService,private fb:FormBuilder,private usuarioService:UsuariosService,private serviceHerra:HerramientaServiceService,
     private serviceInstala:InstalacionesServiceService,
   ){}
