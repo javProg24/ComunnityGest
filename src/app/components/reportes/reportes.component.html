@@ -1,29 +1,30 @@
 <h3>{{title}}</h3>
-<h4>Hola</h4>
 
-<form [formGroup]="reporteForm" class="ocultar" (submit)="onSubmit()">
-    <mat-form-field class="formElement">
-        <mat-label>Titulo:</mat-label>
-        <input matInput type="text" placeholder="titulo" formControlName="title"/>
-    </mat-form-field>
-    <mat-form-field class="formElement">
-        <mat-label>Descripcion:</mat-label>
-        <textarea matInput placeholder="Ex. Se incendio una funda..." formControlName="descripcion"></textarea>
-    </mat-form-field>
-    <mat-form-field class="formElement">
-        <mat-label>Recurso Afectado:</mat-label>
-        <input matInput type="text" placeholder="recurso a." formControlName="recursoAfectado"/>
-    </mat-form-field>
-    <mat-radio-group aria-label="Select an option" class="formElement" formControlName="estado">
-        <mat-radio-button [value]="true">Solucionado</mat-radio-button>
-        <mat-radio-button [value]="false">Sin Solucionar</mat-radio-button>
-    </mat-radio-group>
-    <div class="actions">
-        <button mat-raised-button color="accent" type="submit" (click)="onSubmit()">Guardar</button>
-        <button mat-raised-button color="warn" type="reset" (click)="cleanForm()">Cancelar</button>
-    </div>
+<div class="form-box">
+    <form [formGroup]="reporteForm" class="ocultar" (submit)="onSubmit()">
+        <mat-form-field class="formElement">
+            <mat-label>Titulo:</mat-label>
+            <input matInput type="text" placeholder="titulo" formControlName="title"/>
+        </mat-form-field>
+        <mat-form-field class="formElement">
+            <mat-label>Descripcion:</mat-label>
+            <textarea matInput placeholder="Ex. Se incendio una funda..." formControlName="descripcion"></textarea>
+        </mat-form-field>
+        <mat-form-field class="formElement">
+            <mat-label>Recurso Afectado:</mat-label>
+            <input matInput type="text" placeholder="recurso a." formControlName="recursoAfectado"/>
+        </mat-form-field>
+        <mat-radio-group aria-label="Select an option" class="formElement" formControlName="estado">
+            <mat-radio-button [value]="true">Solucionado</mat-radio-button>
+            <mat-radio-button [value]="false">Sin Solucionar</mat-radio-button>
+        </mat-radio-group>
+        <div class="actions">
+            <button mat-raised-button class="button-guardar" type="submit" (click)="onSubmit()">Guardar</button>
+            <button mat-raised-button class="button-cancelar" type="reset" (click)="cleanForm()">Cancelar</button>
+        </div>
 
 </form>
+</div>
 
 
 
@@ -33,7 +34,7 @@
         <input matInput type="search" appOnlyAllowedCharacters placeholder="recurso afectado" #searchInput
         (keyup)="search(searchInput)"/>
     </mat-form-field>
-    <button (click)="search(searchInput)">Buscar</button>
+    <button mat-raised-button (click)="search(searchInput)">Buscar</button>
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation">
     <ng-container matColumnDef="title">
@@ -56,7 +57,7 @@
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let reporte">
             <button mat-raised-button color="accent" (click)="edit(reporte)">Editar</button>
-            <button mat-raised-button color="warn" (click)="delete(reporte)">Eliminar</button>
+            <button mat-raised-button class="warn-button" color="warn" (click)="delete(reporte)">Eliminar</button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="['title', 'descripcion','recursoAfectado',  'estado', 'actions']"></tr>

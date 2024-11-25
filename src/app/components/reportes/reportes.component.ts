@@ -3,11 +3,11 @@ import { Reporte } from '../../models/reportes.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCell, MatHeaderCell, MatHeaderRow, MatRow, MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import {  MatCardModule } from '@angular/material/card';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { ReportesServiceService } from '../../services/reportes-services/reportes.service.service';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-reportes',
-  imports: [MatCard, MatFormField, MatError, MatLabel, MatTable, MatHeaderCell, MatCell, MatIcon, MatRow, MatHeaderRow, ReactiveFormsModule,
+  imports: [MatFormField, MatError, MatLabel, MatTable, MatHeaderCell, MatCell, MatRow, MatHeaderRow, ReactiveFormsModule,
      CommonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCheckboxModule,MatTableModule, MatIconModule, MatDividerModule,
     NotificationsComponent, MatOption, MatRadioGroup, MatRadioButton],
   templateUrl: './reportes.component.html',

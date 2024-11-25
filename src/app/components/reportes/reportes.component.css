@@ -1,7 +1,230 @@
-.search-container button{
-    margin-left: 20px;
-}
 
-.formElement{
-    margin: 10px;
-}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .formElement {
+    width: 100%; 
+    max-width: 600px;
+    margin-bottom: 12px;
+    text-align: center;
+    
+  }
+
+  .formElement textarea {
+    width: 100%;
+    max-width: 700px; 
+    margin-bottom: 12px;
+    text-align: left;
+    
+  }
+
+  
+  /* Contenedor principal */
+  .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button-cancelar {
+    background-color: #f44336; 
+    color: white; 
+    font-weight: bold; 
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); 
+    text-transform: uppercase; 
+  }
+  
+  .button-cancelar:hover {
+    background-color: #d32f2f; 
+    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.3); 
+  }
+  
+  .button-cancelar:active {
+    background-color: #b71c1c; 
+    box-shadow: none; 
+  }
+  
+  .button-cancelar:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.5); 
+  }
+  .button-guardar {
+    background-color: #4caf50; 
+    color: white; 
+    font-weight: bold; 
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); 
+    text-transform: uppercase; 
+  }
+  
+  .button-guardar:hover {
+    background-color: #388e3c; 
+    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.3); 
+  }
+  
+  .button-guardar:active {
+    background-color: #2e7d32; 
+    box-shadow: none; 
+  }
+  
+  .button-guardar:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5); 
+  }
+ 
+  /* Título */
+  h3 {
+
+    font-size: 1.8rem; 
+    font-weight: 600; 
+    color: #333; 
+    margin-bottom: 16px; 
+    text-align: center; 
+    line-height: 1.4; 
+    font-family: 'Roboto', 'Arial', sans-serif; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px; 
+  }
+  
+  
+  form {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px; 
+    margin: auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+    background: white; 
+    max-width: 700px; 
+    width: 100%; 
+    margin-bottom: 90px;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 8px; 
+  }
+  
+  .mat-form-field.mat-form-field-appearance-fill {
+    margin-bottom: 12px; 
+  }
+  
+  .mat-form-field-wrapper {
+    padding: 0px 12px; 
+  }
+  
+  .mat-input-element {
+    height: 36px; 
+    line-height: 20px; 
+    font-size: 14px; 
+  }
+  
+  .mat-radio-group {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px; 
+  }
+  
+  button {
+    min-width: 100px;
+  }
+  
+  /* Buscar */
+  .search-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    gap: 8px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-container mat-form-field {
+    flex: 1;
+  }
+  
+  .search-container button {
+    white-space: nowrap;
+    min-width: 100px;
+  }
+  
+  
+  /* Tabla */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  th {
+    background: #f5f5f5;
+    color: #555;
+    font-weight: bold;
+  }
+  
+  td {
+    border-top: 1px solid #ddd;
+  }
+  
+  .mat-elevation {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Acciones */
+  td .actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  button.mat-raised-button {
+    text-transform: none;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    form {
+      gap: 8px; 
+    }
+  
+    .search-container {
+      flex-direction: column;
+    }
+  
+    .actions {
+      justify-content: center;
+    }
+  }
+
+  
+  
