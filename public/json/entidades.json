@@ -38,100 +38,20 @@
   ],
   "uso": [
     {
-      "id": "9bb0",
+      "id": "08f2",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
+    },
+    {
+      "id": "bfd5",
       "usuario": "Luis Enrique Sánchez",
       "tipo": "Herramienta",
       "descripcion": "Cortadora de Césped Eléctrica",
       "fechaInicio": "2024-06-20T14:00:00",
       "fechaFin": "2024-06-20T16:00:00"
-    },
-    {
-      "id": "a3bd",
-      "usuario": "Carlos Andrade",
-      "tipo": "Instalacion",
-      "descripcion": "Salón comunal",
-      "fechaInicio": "2024-06-15T10:00:00",
-      "fechaFin": "2024-06-15T12:00:00"
-    },
-    {
-      "id": "781d",
-      "usuario": "Carlos Andrade",
-      "tipo": "Instalacion",
-      "descripcion": "Salón comunal",
-      "fechaInicio": "2024-06-15T10:00:00",
-      "fechaFin": "2024-06-15T12:00:00"
-    },
-    {
-      "id": "6892",
-      "usuario": "Carlos Andrade",
-      "tipo": "Instalacion",
-      "descripcion": "Salón comunal",
-      "fechaInicio": "2024-06-15T10:00:00",
-      "fechaFin": "2024-06-15T12:00:00"
-    },
-    {
-      "id": "2b33",
-      "usuario": "Carlos Andrade",
-      "tipo": "Instalacion",
-      "descripcion": "Salón comunal",
-      "fechaInicio": "2024-06-15T10:00:00",
-      "fechaFin": "2024-06-15T12:00:00"
-    },
-    {
-      "id": "b027",
-      "usuario": "Luis Enrique Sánchez",
-      "tipo": "Herramienta",
-      "descripcion": "Cortadora de Césped Eléctrica",
-      "fechaInicio": "2024-06-20T14:00:00",
-      "fechaFin": "2024-06-20T16:00:00"
-    },
-    {
-      "id": "10ea",
-      "usuario": "Luis Enrique Sánchez",
-      "tipo": "Herramienta",
-      "descripcion": "Cortadora de Césped Eléctrica",
-      "fechaInicio": "2024-06-20T14:00:00",
-      "fechaFin": "2024-06-20T16:00:00"
-    },
-    {
-      "id": "67c8",
-      "usuario": "Carlos Andrade",
-      "tipo": "Instalacion",
-      "descripcion": "Salón comunal",
-      "fechaInicio": "2024-06-15T10:00:00",
-      "fechaFin": "2024-06-15T12:00:00"
-    },
-    {
-      "id": "b060",
-      "usuario": "Luis Enrique Sánchez",
-      "tipo": "Herramienta",
-      "descripcion": "Cortadora de Césped Eléctrica",
-      "fechaInicio": "2024-06-20T14:00:00",
-      "fechaFin": "2024-06-20T16:00:00"
-    },
-    {
-      "id": "e772",
-      "usuario": "Carlos Andrade",
-      "tipo": "Instalacion",
-      "descripcion": "Salón comunal",
-      "fechaInicio": "2024-06-15T10:00:00",
-      "fechaFin": "2024-06-15T12:00:00"
-    },
-    {
-      "id": "50ea",
-      "usuario": "Carlos Andrade",
-      "tipo": "Instalacion",
-      "descripcion": "Salón comunal",
-      "fechaInicio": "2024-06-15T10:00:00",
-      "fechaFin": "2024-06-15T12:00:00"
-    },
-    {
-      "id": "6407",
-      "usuario": "Carlos Andrade",
-      "tipo": "Instalacion",
-      "descripcion": "Salón comunal",
-      "fechaInicio": "2024-06-15T10:00:00",
-      "fechaFin": "2024-06-15T12:00:00"
     }
   ],
   "reporte": [],
@@ -159,28 +79,24 @@
     {
       "id": "1",
       "nombre": "Cortadora de Césped Eléctrica",
-      "estado": "Disponible",
       "ubicacion": "Almacén Central",
       "descripcion": "Herramienta eléctrica para cortar césped de áreas pequeñas y medianas."
     },
     {
       "id": "2",
       "nombre": "Mesa de Eventos Plegable",
-      "estado": "En reparación",
       "ubicacion": "Almacén de Eventos",
       "descripcion": "Mesa de eventos para colocar en salones o áreas al aire libre."
     },
     {
       "id": "3",
       "nombre": "Pistola de Pintura Eléctrica",
-      "estado": "Disponible",
       "ubicacion": "Almacén de Herramientas",
       "descripcion": "Herramienta eléctrica para pintar grandes superficies de manera uniforme."
     },
     {
       "id": "4",
       "nombre": "Escalera Extensible",
-      "estado": "Disponible",
       "ubicacion": "Almacén de Herramientas",
       "descripcion": "Escalera de aluminio, ideal para trabajos de jardinería y mantenimiento."
     }
@@ -190,29 +106,25 @@
       "id": "1",
       "nombre": "Salón Comunal A",
       "tipo": "Salón Comunal",
-      "capacidad": 50,
-      "horarioDisponible": "Lunes a Viernes, de 9:00 AM a 6:00 PM"
+      "capacidad": 50
     },
     {
       "id": "2",
       "nombre": "Cancha de Fútbol",
       "tipo": "Área Deportiva",
-      "capacidad": 20,
-      "horarioDisponible": "Todos los días, de 7:00 AM a 10:00 PM"
+      "capacidad": 20
     },
     {
       "id": "3",
       "nombre": "Salón de Eventos",
       "tipo": "Salón Comunal",
-      "capacidad": 100,
-      "horarioDisponible": "Sábados y Domingos, de 10:00 AM a 8:00 PM"
+      "capacidad": 100
     },
     {
       "id": "4",
       "nombre": "Gimnasio Comunitario",
       "tipo": "Área Deportiva",
-      "capacidad": 30,
-      "horarioDisponible": "Lunes a Viernes, de 6:00 AM a 9:00 PM"
+      "capacidad": 30
     }
   ],
   "integrante": [

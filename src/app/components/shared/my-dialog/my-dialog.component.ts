@@ -21,4 +21,10 @@ export class MyDialogComponent {
     onCerrar():void{
       this.dialogRef.close(true);
     }
+    cancelar(): void {
+      this.dialogRef.close(false); // Si el usuario cancela
+    }
+    confirmar(): void {
+      this.dialogRef.close(false); // Si el usuario cancela
+    }
 }
