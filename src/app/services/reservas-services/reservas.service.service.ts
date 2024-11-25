@@ -1,38 +1,60 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Reserva } from '../../models/reservas.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReservasServiceService {
-  private jsonUrl = "http://localhost:3000/reservas";
+export class ReservasService {
+
+  private jsonUrl = 'http://localhost:3000/reservas';
+
   constructor(private http: HttpClient) { }
-  getURL(): string {
-    return this.jsonUrl;
-  }
-  getReservas(): Observable<Reserva[]>{
-    return this.http.get<Reserva[]>(this.jsonUrl);
+
+  // Obtener todas las reservas
+  getReservas(): Observable<Reserva[]> {
+    return this.http.get<Reserva[]>(this.jsonUrl).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getReservasPorUsuario(usuarioId: string): Observable<Reserva[]> {
-    return this.http.get<Reserva[]>(`${this.jsonUrl}?usuarioId=${usuarioId}`);
+  // Obtener una reserva por ID
+  getReservaById(id: number): Observable<Reserva> {
+    const url = `${this.jsonUrl}/${id}`;
+    return this.http.get<Reserva>(url).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getReservasPorRecurso(recursoId: number): Observable<Reserva[]> {
-    return this.http.get<Reserva[]>(`${this.jsonUrl}?recursoId=${recursoId}`);
-  }
-
+  // Crear una nueva reserva
   crearReserva(reserva: Reserva): Observable<Reserva> {
-    return this.http.post<Reserva>(this.jsonUrl, reserva);
+    return this.http.post<Reserva>(this.jsonUrl, reserva).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  actualizarReserva(reserva: Reserva): Observable<Reserva> {
-    return this.http.put<Reserva>(`${this.jsonUrl}/${reserva.id}`, reserva);
+  // Actualizar una reserva existente
+  actualizarReserva(id: number, reserva: Reserva): Observable<Reserva> {
+    const url = `${this.jsonUrl}/${id}`;
+    return this.http.put<Reserva>(url, reserva).pipe(
+      catchError(this.handleError)
+    );
   }
 
+  // Eliminar una reserva
   eliminarReserva(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.jsonUrl}/${id}`);
+    const url = `${this.jsonUrl}/${id}`;
+    return this.http.delete<void>(url).pipe(
+      catchError(this.handleError)
+    );
   }
+
+  // Manejo de errores
+  private handleError(error: any): Observable<never> {
+    console.error('Error en el servicio', error);
+    return throwError('Ocurrió un error en la solicitud, intenta de nuevo más tarde.');
+  }
+
 }

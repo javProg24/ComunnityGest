@@ -4,6 +4,6 @@ export interface Reserva {
     tipo: string;
     fechaInicio: Date;
     fechaFin: Date;
-    estado: 'PENDIENTE' | 'CONFIRMADA' | 'CANCELADA';
-    descripcion: string;
+    estado: string;
+    descripcion?: string;
   }
