@@ -10,7 +10,7 @@ export class ReportesServiceService {
   private reportes: Reporte[] = [];
 
 
-  private jsonUrl="http://localhost:3000/reportes"
+  private jsonUrl="http://localhost:3000/reporte"
   constructor( private http:HttpClient) { 
   }
 
