@@ -1,7 +1,7 @@
 export interface Reserva {
     id?: number;
     usuario: string;
-    tipo: number;
+    tipo: string;
     fechaInicio: Date;
     fechaFin: Date;
     estado: string;
