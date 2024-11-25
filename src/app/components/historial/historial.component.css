@@ -1,0 +1,123 @@
+/* Contenedor principal */
+.table-container {
+    margin: 20px auto; /* Espaciado vertical de 20px y centrado horizontal */
+    padding: 0 20px; /* Espaciado interno a los lados (izquierda y derecha) */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todo horizontalmente */
+    text-align: center; /* Centra texto */
+    gap: 20px; /* Espaciado entre el título, notificaciones y la tabla */
+  }
+/* Tabla */
+.centered-table {
+    width: 100%; /* La tabla ocupará todo el ancho disponible */
+    max-width: 1200px; /* Tamaño máximo para limitar su ancho */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Oculta contenido desbordado */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra opcional para un mejor diseño */
+}
+mat-header-row,
+mat-row {
+    display: flex;
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+mat-header-cell,
+mat-cell {
+    padding: 20px; /* Espaciado interno de 20px en todas las celdas */
+    text-align: center; /* Centra el contenido de las celdas */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    justify-content: center;
+    align-items: center;
+}
+  /* Encabezado de usuario con filtro */
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center;
+    justify-content: center;
+    gap: 8px; /* Espaciado entre el texto y el input */
+}
+/* Estilos para columnas específicas */
+.activo {
+    color: #4caf50;
+    font-weight: bold;
+}
+.inactivo {
+    color: #f44336;
+    font-weight: bold;
+}
+  /* Botones de acciones */
+button.mat-icon-button {
+    margin-right: 5px;
+    display: inline-flex;
+    align-items: center;
+}
+.mat-icon {
+    font-size: 20px;
+}
+.actions{
+    margin-left: 20px;
+    margin-top: 30px;
+}
+/* estados */
+.estado-pendiente {
+    background-color: #ffeb3b; /* Amarillo */
+    color: #000;              /* Negro */
+}
+.estado-confirmada {
+    background-color: #4caf50; /* Verde */
+    color: #fff;               /* Blanco */
+}
+.estado-cancelada {
+    background-color: #f44336; /* Rojo */
+    color: #fff;               /* Blanco */
+}
+.notification {
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: opacity 0.5s ease-in-out;
+    max-width: 400px; /* Limita el ancho de la notificación */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    position: relative;
+    opacity: 1;
+}
+.notification.info {
+    background-color: #d9f7ff;
+    color: #007b7f;
+    border: 1px solid #007b7f;
+}
+.notification.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #155724;
+}
+.notification.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #721c24;
+}
+.filtros {
+    display: flex; /* Alinea los elementos en una sola fila */
+    justify-content: flex-start; /* Los elementos se alinean al inicio */
+    align-items: center; /* Asegura que estén centrados verticalmente */
+    gap: 10px; /* Espaciado uniforme entre los elementos */
+    margin-bottom: 20px; /* Espaciado entre el formulario y la tabla */
+  }
+  
+  .filtros mat-form-field {
+    flex: 0 0 auto; /* Evita que los elementos cambien de tamaño o se desplacen */
+    margin-right: 10px; /* Espaciado a la derecha de cada campo */
+    min-width: 150px; /* Ancho mínimo */
+    width: 275px;
+  }
+  
+  .filtros mat-form-field:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último elemento */
+  }

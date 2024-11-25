@@ -1,10 +1,8 @@
-export interface Recurso{
+export interface Historial{
     id?:number,
-    cedula:string,
     usuario:string,
     tipo:string,
-    recurso:string,
-    fecha:Date,
-    horaInicio:Date,
-    horaFin:Date
+    descripcion:string,
+    fechaInicio:Date,
+    fechaFin:Date,
 }

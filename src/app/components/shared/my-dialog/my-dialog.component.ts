@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 export interface DialogPerfil{
   nombre: string,
   apellido: string,
@@ -20,5 +20,11 @@ export class MyDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data:DialogPerfil){}
     onCerrar():void{
       this.dialogRef.close(true);
+    }
+    cancelar(): void {
+      this.dialogRef.close(false); // Si el usuario cancela
+    }
+    confirmar(): void {
+      this.dialogRef.close(false); // Si el usuario cancela
     }
 }

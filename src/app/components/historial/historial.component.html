@@ -1,1 +1,193 @@
-<p>historial works!</p>
+<mat-tab-group>
+    <!-- Pestaña Reservas -->
+    <mat-tab label="Reservas">
+      <div class="table-container">
+        <h1>Reservas Registradas</h1>
+        <div *ngIf="notificationHist.message" class="notification" [ngClass]="notificationHist.type">
+            {{ notificationHist.message }}
+        </div>
+        
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8 centered-table">
+          <!-- Columna ID -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let reserva"> {{ reserva.id }} </mat-cell>
+          </ng-container>
+  
+          <!-- Columna Usuario -->
+          <ng-container matColumnDef="usuario">
+            <mat-header-cell *matHeaderCellDef> Usuario </mat-header-cell>
+            <mat-cell *matCellDef="let reserva"> {{ reserva.usuario }} </mat-cell>
+          </ng-container>
+  
+          <!-- Columna Tipo -->
+          <ng-container matColumnDef="tipo">
+            <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+            <mat-cell *matCellDef="let reserva"> {{ reserva.tipo }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="descripcion">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Descripción </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let reserva"> {{reserva.descripcion}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="fechaInicio">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Fecha de inicio </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let reserva"> {{reserva.fechaInicio| date:'short'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="fechaFin">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Fecha de fin </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let reserva"> {{reserva.fechaFin| date:'short'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+            <mat-cell *matCellDef="let reserva" [ngClass]="getEstadoClass(reserva.estado)">
+                {{ reserva.estado }}
+            </mat-cell>
+        </ng-container>
+  
+          <!-- Columna Acciones -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+            <mat-cell *matCellDef="let reserva">
+              <button mat-icon-button color="primary" (click)="nuevoRegistro(reserva)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+  
+          <!-- Filas -->
+          <mat-header-row *matHeaderRowDef="['id', 'usuario', 'tipo', 'descripcion', 'fechaInicio', 'fechaFin','estado','actions']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['id', 'usuario', 'tipo', 'descripcion', 'fechaInicio', 'fechaFin','estado','actions'];"></mat-row>
+        </mat-table>
+  
+        <!-- Paginador -->
+        <mat-paginator [length]="200" [pageSizeOptions]="[10, 7, 20]" aria-label="Select page" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </mat-tab>
+  
+    <!-- Pestaña Historial -->
+    <mat-tab label="Historial">
+        <div class="table-container">
+            <h1>Historial de recursos</h1>
+            <!-- <button mat-button (click)="verUsuario()">Ver usuario</button> -->
+            <div *ngIf="notificationEli.message" class="notification" [ngClass]="notificationEli.type">
+                {{ notificationEli.message }}
+            </div>
+
+            <div class="filtros">
+            <form [formGroup]="formulario" (ngSubmit)="buscar()">
+              <mat-form-field appearance="outline">
+                <mat-label>Usuario</mat-label>
+                <input matInput 
+                type="search" 
+                formControlName="usuario"
+                [matAutocomplete]="auto"
+                placeholder="Buscar Usuario"
+                (keyup)="buscarUsuario(searchInput.value)"
+                #searchInput/>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let usuario of usuariosFiltrados" [value]="usuario.nombre">
+                    {{usuario.nombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Tipo</mat-label>
+                <mat-select formControlName="tipo"
+                (selectionChange)="obtener($event.value)">
+                  <mat-option value="" disabled>Seleccione...</mat-option>
+                  <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+                    {{ tipo.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <mat-select formControlName="descripcion">
+                  <mat-option value="" disabled>Seleccione...</mat-option>
+                  <mat-option *ngFor="let nombre of nombres" [value]="nombre">
+                    {{nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha de inicio</mat-label>
+                <input matInput 
+                       formControlName="fechaInicio"
+                       [matDatepicker]="pickerInicio"
+                       placeholder="Seleccionar fecha">
+                <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+                <mat-datepicker #pickerInicio></mat-datepicker>
+              </mat-form-field>
+            
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha de fin</mat-label>
+                <input matInput 
+                       formControlName="fechaFin"
+                       [matDatepicker]="pickerFin"
+                       placeholder="Seleccionar fecha">
+                <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFin></mat-datepicker>
+              </mat-form-field>
+
+              <button mat-flat-button type="submit">Buscar</button>
+            </form>
+            
+            </div>
+            
+            <!-- tabla -->
+            <mat-table [dataSource]="dataHistorial" class="mat-elevation-z8 centered-table">
+              <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                  <mat-cell *matCellDef="let historial"> {{ historial.id }} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="usuario">
+                <mat-header-cell *matHeaderCellDef> Usuario </mat-header-cell>
+                <mat-cell *matCellDef="let historial"> {{ historial.usuario }} </mat-cell>
+              </ng-container>
+      
+              <!-- Columna Tipo -->
+              <ng-container matColumnDef="tipo">
+                <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+                <mat-cell *matCellDef="let historial"> {{ historial.tipo }} </mat-cell>
+              </ng-container>
+
+            <ng-container matColumnDef="descripcion">
+                <mat-header-cell mat-header-cell *matHeaderCellDef> Descripción </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let historial"> {{historial.descripcion}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaInicio">
+                <mat-header-cell mat-header-cell *matHeaderCellDef> Fecha de inicio </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let historial"> {{historial.fechaInicio| date:'short'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaFin">
+                <mat-header-cell mat-header-cell *matHeaderCellDef> Fecha de fin </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let historial"> {{historial.fechaFin| date:'short'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+                <mat-cell *matCellDef="let historial">
+                    <button mat-icon-button color="primary" (click)="eliminarRegistro(historial)">
+                    <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="['id', 'usuario', 'tipo', 'descripcion', 'fechaInicio', 'fechaFin','actions']"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: ['id', 'usuario', 'tipo', 'descripcion', 'fechaInicio', 'fechaFin','actions'];"></mat-row>
+        </mat-table>  
+        </div>
+        <mat-paginator [length]="200" [pageSizeOptions]="[10, 7, 20]" aria-label="Select page" showFirstLastButtons>
+        </mat-paginator>
+    </mat-tab>
+</mat-tab-group>
+  
