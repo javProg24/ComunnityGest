@@ -52,6 +52,14 @@
       "descripcion": "Cortadora de Césped Eléctrica",
       "fechaInicio": "2024-06-20T14:00:00",
       "fechaFin": "2024-06-20T16:00:00"
+    },
+    {
+      "id": "42b7",
+      "usuario": "Carlos Andrade",
+      "tipo": "Instalacion",
+      "descripcion": "Salón comunal",
+      "fechaInicio": "2024-06-15T10:00:00",
+      "fechaFin": "2024-06-15T12:00:00"
     }
   ],
   "reporte": [],

@@ -139,11 +139,11 @@ export class ReservasComponent implements OnInit,AfterViewInit {
   obtener(tipo:string):void{
     this.tipoSeleccionado = tipo;
     if(tipo=='i'){
-      this.serviceInstala.getNombres().subscribe(nombres=>{
+      this.serviceInstala.getNombresInst().subscribe(nombres=>{
         this.nombres = nombres;
       })
     }else if(tipo=='h'){
-      this.serviceHerr.getNombres().subscribe(nombres=>{
+      this.serviceHerr.getNombresHerra().subscribe(nombres=>{
         this.nombres=nombres;
       })
     }

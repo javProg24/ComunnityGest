@@ -94,26 +94,26 @@
                 </mat-autocomplete>
               </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Tipo</mat-label>
-                <mat-select formControlName="tipo"
-                (selectionChange)="obtener($event.value)">
-                  <mat-option value="" disabled>Seleccione...</mat-option>
-                  <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
-                    {{ tipo.label }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-
-              <mat-form-field appearance="outline">
-                <mat-label>Descripción</mat-label>
-                <mat-select formControlName="descripcion">
-                  <mat-option value="" disabled>Seleccione...</mat-option>
-                  <mat-option *ngFor="let nombre of nombres" [value]="nombre">
-                    {{nombre}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                  <mat-label>Tipo</mat-label>
+                  <mat-select formControlName="tipo" (selectionChange)="obtener($event.value)">
+                    <mat-option value="" disabled>Seleccione...</mat-option>
+                    <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+                      {{ tipo.label }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              
+                <mat-form-field appearance="outline">
+                  <mat-label>Descripción</mat-label>
+                  <mat-select formControlName="descripcion">
+                    <mat-option value="" disabled>Seleccione...</mat-option>
+                    <mat-option *ngFor="let nombre of nombres" [value]="nombre">
+                      {{ nombre }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
 
               <mat-form-field appearance="outline">
                 <mat-label>Fecha de inicio</mat-label>

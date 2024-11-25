@@ -12,7 +12,7 @@ export class HerramientaServiceService {
   getHerramientas():Observable<Herramienta>{
     return this.http.get<Herramienta>(this.url);
   }
-  getNombres(): Observable<string[]> {
+  getNombresHerra(): Observable<string[]> {
     return this.http.get<Herramienta[]>(this.url).pipe(
       map(herramientas => herramientas.map(herramienta => herramienta.nombre))
     );

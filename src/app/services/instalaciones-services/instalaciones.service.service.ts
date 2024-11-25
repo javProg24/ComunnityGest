@@ -12,7 +12,7 @@ export class InstalacionesServiceService {
   getInstalacion():Observable<Instalacion[]>{
     return this.http.get<Instalacion[]>(this.url);
   }
-  getNombres(): Observable<string[]> {
+  getNombresInst(): Observable<string[]> {
     return this.http.get<Instalacion[]>(this.url).pipe(
       map(instalaciones => instalaciones.map(instalacion => instalacion.nombre))
     )

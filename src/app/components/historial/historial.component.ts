@@ -55,9 +55,7 @@ export class HistorialComponent implements OnInit, AfterViewInit{
   notificationEli: { message: string; type: 'info' | 'success' | 'error' | 'warning'  } = {
     message: '',type: 'info'
   };
-  tipos = [
-    { value: 'Instalacion', label: 'Instalación' },{ value: 'Herramienta', label: 'Herramienta' }
-  ];
+  
   dataSource=new MatTableDataSource<Reserva>();
   dataHistorial=new MatTableDataSource<Historial>();
   formulario!:FormGroup;
@@ -153,16 +151,19 @@ export class HistorialComponent implements OnInit, AfterViewInit{
       this.usuariosFiltrados = usuarios;
     });
   }
+  tipos = [
+    { value: 'Instalacion', label: 'Instalación' },{ value: 'Herramienta', label: 'Herramienta' }
+  ];
   tipoSeleccionado: string='';
   nombres: string[] = [];
   obtener(tipo:string):void{
     this.tipoSeleccionado = tipo;
-    if(tipo=='i'){
-      this.serviceInstala.getNombres().subscribe(nombres=>{
+    if(tipo=='Instalacion'){
+      this.serviceInstala.getNombresInst().subscribe(nombres=>{
         this.nombres = nombres;
       })
-    }else if(tipo=='h'){
-      this.serviceHerra.getNombres().subscribe(nombres=>{
+    }else if(tipo=='Herramienta'){
+      this.serviceHerra.getNombresHerra().subscribe(nombres=>{
         this.nombres=nombres;
       })
     }
