@@ -14,7 +14,7 @@ import { MatButton } from '@angular/material/button';
 import { Reserva } from '../../models/reservas.model';
 import { ReservasService } from '../../services/reservas-services/reservas.service.service';
 import { InstalacionesServiceService } from '../../services/instalaciones-services/instalaciones.service.service';
-import { HerramientaServiceService } from '../../services/herramientas-services/herramienta.service.service';
+import { HerramientasService } from '../../services/herramientas-services/herramienta.service.service';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -60,7 +60,7 @@ export class ReservasComponent implements OnInit,AfterViewInit {
     private fb: FormBuilder,
     private reservasService: ReservasService,
     private serviceInstala:InstalacionesServiceService,
-    private serviceHerr:HerramientaServiceService
+    private serviceHerr:HerramientasService
   ) {
     this.reservasForm = this.fb.group({
       usuario: ['', Validators.required],
