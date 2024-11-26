@@ -11,6 +11,7 @@ button.router-link-active {
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #b2f2bb, #bde0fe);
     color: #333; /* Color base del texto */
+    height: 100vh;
   }
   
   /* Estilo para el encabezado */
@@ -82,4 +83,17 @@ button.router-link-active {
       margin-top: 10px;
       justify-content: flex-start;
     }
+  }
+
+  footer {
+    background-color: #354f7e;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 1rem;
+    margin-top: auto; /* Asegura que el pie de página se empuje hacia abajo */
+  }
+  
+  footer p {
+    margin: 0;
   }
