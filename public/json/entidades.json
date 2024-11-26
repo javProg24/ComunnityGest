@@ -209,57 +209,57 @@
   "integrante": [
     {
       "id": "1",
-      "nombre": "Javier",
+      "nombre": " Felix Javier",
       "apellido": "Tomala Gonzalez",
       "foto": "../image/Tomala.jpeg",
       "link": "https://github.com/javProg24",
       "numero": 9667182694,
-      "rol": ""
+      "rol": "Lider - Colaborador en CRUD Historial"
     },
     {
       "id": "2",
-      "nombre": "Pedro",
-      "apellido": "Aviles Martinez",
+      "nombre": "Pedro Andres",
+      "apellido": "Aviles Baque",
       "foto": "../image/Aviles.png",
       "link": "https://github.com/Peter16Xo",
       "numero": 946593534,
-      "rol": ""
+      "rol": "Colaborador en CRUD Usuario"
     },
     {
       "id": "3",
-      "nombre": "Jean",
+      "nombre": "Jean Marco",
       "apellido": "Romero Serrano",
       "foto": "../image/Romero.jpeg",
       "link": "https://github.com/JMarco20",
       "numero": 954456734,
-      "rol": ""
+      "rol": "Colaborador en CRUD Reportes"
     },
     {
       "id": "4",
-      "nombre": "Marcos",
-      "apellido": "Falconni Caiza",
+      "nombre": "Marcos Isaac",
+      "apellido": "Falconni Villamar",
       "foto": "../image/Falconni.jpeg",
       "link": "https://github.com/FalconMarc",
       "numero": 945643578,
-      "rol": ""
+      "rol": "Colaborador en CRUD Herramientas"
     },
     {
       "id": "5",
-      "nombre": "Steven",
-      "apellido": "Falquez Lopez",
+      "nombre": "Steven David",
+      "apellido": "Falquez Pico",
       "foto": "../image/Falquez.png",
       "link": "https://github.com/ING-DAVID-777",
       "numero": 945678534,
-      "rol": ""
+      "rol": "Colaborador en CRUD Herramientas"
     },
     {
       "id": "6",
-      "nombre": "Desconocido",
-      "apellido": "apellidos",
-      "foto": "../image/default.png",
+      "nombre": "Kevin Andres",
+      "apellido": "Leon Suarez",
+      "foto": "../image/Kevin.png",
       "link": "#",
       "numero": 906330537,
-      "rol": ""
+      "rol": "Colaborador en CRUD Reservas"
     }
   ]
 }

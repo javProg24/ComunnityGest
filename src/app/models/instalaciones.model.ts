@@ -3,4 +3,5 @@ export interface Instalacion{
     nombre: string,
     tipo:'Instalacion',
     capacidad: number,
+    horario:Date;
 }

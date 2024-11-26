@@ -3,17 +3,21 @@ button.router-link-active {
     font-weight: bold;
     color: #007bff; /* Cambia el color cuando el botón está activo */
   }
-  
-  /* Estilo general */
-  body {
+  html, body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #b2f2bb, #bde0fe);
-    color: #333; /* Color base del texto */
-    height: 100vh;
+    height: 100%; /* Asegura que html y body ocupen toda la pantalla */
+    box-sizing: border-box;
   }
-  
+  /* Estilo general */
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Hace que el body ocupe al menos toda la altura de la pantalla */
+  }
+  main {
+    flex: 1; /* Hace que el contenido ocupe el espacio disponible */
+  }
   /* Estilo para el encabezado */
   header.navbar {
     display: flex;
@@ -88,14 +92,9 @@ button.router-link-active {
   footer {
     background-color: #354f7e;
     color: white;
-    padding: 20px;
+    padding: 10px; /* Ajusta el tamaño del footer */
     text-align: center;
-    font-size: 1rem;
-    margin-top: auto; /* Asegura que el pie de página se empuje hacia abajo */
-  }
-  
-  footer p {
-    margin: 0;
+    font-size: 0.9rem; /* Reduce el tamaño del texto si es necesario */
   }
 
   

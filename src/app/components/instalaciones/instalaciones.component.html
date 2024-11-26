@@ -1,1 +1,72 @@
-<p>instalaciones works!</p>
+
+<h3 class="mat-title">Formulario de Instalaciones</h3>
+
+<div class="container">
+   <form [formGroup]="instalacionesForm" (ngSubmit)="onSubmit()" class="form-container">
+        <!-- id -->
+        <mat-form-field appearance="fill" class="full-width">
+         <mat-label>Id</mat-label>
+         <input matInput formControlName="id" placeholder="Ingrese el id">
+         <mat-error *ngIf="instalacionesForm.get('id')?.hasError('required')">El id es obligatorio</mat-error>
+       </mat-form-field>
+     
+       <!-- Nombre -->
+       <mat-form-field appearance="fill" class="full-width">
+         <mat-label>Nombre de la Instalación</mat-label>
+         <input matInput formControlName="nombre" placeholder="Ingrese el nombre">
+         <mat-error *ngIf="instalacionesForm.get('nombre')?.hasError('required')">El nombre es obligatorio</mat-error>
+         <mat-error *ngIf="instalacionesForm.get('nombre')?.hasError('minlength')">Debe tener al menos 3 caracteres</mat-error>
+       </mat-form-field>
+     
+       <!-- Tipo -->
+       <mat-form-field appearance="fill" class="full-width">
+         <mat-label>Tipo de Instalación</mat-label>
+         <mat-select formControlName="tipo">
+           <mat-option value="deportiva">Deportiva</mat-option>
+           <mat-option value="recreativa">Recreativa</mat-option>
+           <mat-option value="educativa">Educativa</mat-option>
+         </mat-select>
+         <mat-error *ngIf="instalacionesForm.get('tipo')?.hasError('required')">Debe seleccionar un tipo</mat-error>
+       </mat-form-field>
+     
+       <!-- Capacidad -->
+       <mat-form-field appearance="fill" class="full-width">
+         <mat-label>Capacidad</mat-label>
+         <input matInput type="number" formControlName="capacidad" placeholder="Ingrese la capacidad">
+         <mat-error *ngIf="instalacionesForm.get('capacidad')?.hasError('required')">La capacidad es obligatoria</mat-error>
+         <mat-error *ngIf="instalacionesForm.get('capacidad')?.hasError('min') || instalacionesForm.get('capacidad')?.hasError('max')">Debe estar entre 1 y 500</mat-error>
+       </mat-form-field>
+     
+       <!-- Horario -->
+       <mat-form-field appearance="fill" class="full-width">
+         <mat-label>Horario</mat-label>
+         <input matInput type="date" formControlName="horario" placeholder="Ingrese el horario">
+         <mat-error *ngIf="instalacionesForm.get('horario')?.hasError('required')">El horario es obligatorio</mat-error>
+       </mat-form-field>
+     
+       <!-- Botones -->
+       <button mat-raised-button color="primary" type="submit" [disabled]="instalacionesForm.invalid">{{ editar ? 'Actualizar' : 'Guardar' }}</button>
+       <button mat-raised-button color="warn" type="button" (click)="limpiarFormulario()">Limpiar</button>
+     </form>
+ </div>
+ <div>
+   @for (instalacion of instalaciones; track $index) {
+       <div class="carta">
+           <mat-card appearance="outlined">
+               <mat-card-header>
+                 <mat-card-title>{{ instalacion.nombre }}</mat-card-title>
+                 <mat-card-subtitle>Tipo: {{ instalacion.tipo }}</mat-card-subtitle>
+                 <mat-card-subtitle>Horario: {{ instalacion.horario }}</mat-card-subtitle>
+               </mat-card-header>
+               <mat-card-content>
+                 <p>Capacidad: {{ instalacion.capacidad }} personas</p>
+               </mat-card-content>
+             <button class="botonDistanciado" mat-stroked-button (click)="editarInstalacion(instalacion)">Editar</button>
+             <button class="" mat-stroked-button (click)="eliminarInstalacion(instalacion)">Eliminar            <mat-icon>delete</mat-icon>
+             </button>
+             
+             </mat-card>
+       </div>
+  
+   }  
+ </div>

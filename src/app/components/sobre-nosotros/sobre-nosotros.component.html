@@ -12,7 +12,7 @@
                     </mat-card-title>
                 </mat-card-header>
                 <img mat-card-image 
-                [src]="perfil.foto ? perfil.foto : '/public/image/default.png'" 
+                [src]="perfil.foto" 
                 [alt]="perfil.nombre + ' ' + perfil.apellido">
                 <mat-card-actions class="center-actions">
                     <button mat-flat-button class="btnVer" (click)="verPerfil(perfil)">

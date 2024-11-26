@@ -17,4 +17,16 @@ export class InstalacionesServiceService {
       map(instalaciones => instalaciones.map(instalacion => instalacion.nombre))
     )
   }
+  guardarInstalacion(instalacion: Instalacion): Observable<Instalacion> {
+    console.log('INSTALAAAAAAARRRR '+instalacion.nombre);
+    return this.http.post<Instalacion>(this.url, instalacion);
+  }
+
+  actualizarInstalacion(instalacion: Instalacion): Observable<Instalacion> {
+    return this.http.put<Instalacion>(`${this.url}/${instalacion.id}`, instalacion);
+  }
+
+  eliminarInstalacion(instalacion: Instalacion): Observable<Instalacion> {
+    return this.http.delete<Instalacion>(`${this.url}/${instalacion.id}`);
+  }
 }
