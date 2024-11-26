@@ -23,7 +23,7 @@ import {MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepi
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Usuario } from '../../models/usuarios.model';
 import { UsuariosService } from '../../services/usuarios-services/usuarios.service.service';
-import { HerramientaServiceService } from '../../services/herramientas-services/herramienta.service.service';
+import { HerramientasService } from '../../services/herramientas-services/herramienta.service.service';
 import { InstalacionesServiceService } from '../../services/instalaciones-services/instalaciones.service.service';
 import { ReservasService } from '../../services/reservas-services/reservas.service.service';
 @Component({
@@ -63,7 +63,7 @@ export class HistorialComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator!:MatPaginator;
   @ViewChild('paginatorHistorial') paginatorHistorial!: MatPaginator;
   constructor(private reservaService:ReservasService,private mydialog:MatDialog,
-    private historialService:HistorialServiceService,private fb:FormBuilder,private usuarioService:UsuariosService,private serviceHerra:HerramientaServiceService,
+    private historialService:HistorialServiceService,private fb:FormBuilder,private usuarioService:UsuariosService,private serviceHerra:HerramientasService,
     private serviceInstala:InstalacionesServiceService,
   ){}
   ngOnInit(): void {
