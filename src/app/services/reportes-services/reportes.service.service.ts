@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { map, Observable } from 'rxjs';
 import { Reporte } from '../../models/reportes.model';
 
 @Injectable({
@@ -7,37 +8,42 @@ import { Reporte } from '../../models/reportes.model';
 })
 export class ReportesServiceService {
   private reportes: Reporte[] = [];
-  private reportesSubject = new BehaviorSubject<Reporte[]>([]);
 
-  reportes$ = this.reportesSubject.asObservable();
-  constructor() { }
-  listarReportes(): void {
-    this.reportesSubject.next(this.reportes);
+
+  private jsonUrl="http://localhost:3000/reporte"
+  constructor( private http:HttpClient) { 
   }
 
-  agregarReporte(reporte: Reporte): void {
-    this.reportes.push({ ...reporte, id: this.generarId() });
-    this.listarReportes();
+  getReportes():Observable<Reporte[]>{
+    return this.http.get<Reporte[]>(this.jsonUrl);
   }
 
-  editarReporte(id: string, reporteEditado: Reporte): void {
-      const index = this.reportes.findIndex((r) => r.id === id);
-      if (index > -1) {
-          this.reportes[index] = { ...reporteEditado, id };
-          this.listarReportes();
-      }
+
+  //Buscar Reportes
+  getReportesSearch(recursoAfectado?:string, title?:string):Observable<Reporte[]>{
+    return this.http.get<Reporte[]>(this.jsonUrl).pipe(
+      map((reportes)=>
+        reportes.filter((reporte)=>
+        (recursoAfectado ? reporte.recursoAfectado?.toLocaleLowerCase().includes(recursoAfectado.toLowerCase()):true)
+        )
+      )
+    );
   }
 
-  eliminarReporte(id: string): void {
-      this.reportes = this.reportes.filter((r) => r.id !== id);
-      this.listarReportes();
+  //Crear Reportes
+  addReporte(reporte:Reporte):Observable<Reporte>{
+    return this.http.post<Reporte>(this.jsonUrl, reporte);
   }
 
-  buscarPorEstado(estado: string): Reporte[] {
-      return this.reportes.filter((r) => r.estado === estado);
+  //Editar Reportes
+  updateReports(reporte: Reporte):Observable<Reporte>{
+    const urlReporte = `${this.jsonUrl}/${reporte.id}`
+    return this.http.put<Reporte>(urlReporte, reporte);
   }
 
-  private generarId(): string {
-      return Math.random().toString(36).substr(2, 9);
-}
+  //Eliminar Reportes
+  deleteReports(reporte:Reporte):Observable<void>{
+    const urlReporte = `${this.jsonUrl}/${reporte.id}`
+    return this.http.delete<void>(urlReporte);
+  }
 }

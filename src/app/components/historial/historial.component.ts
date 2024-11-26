@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe, NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule, } from '@angular/material/button';
@@ -17,15 +17,13 @@ import { Reserva } from '../../models/reservas.model';
 import { Historial } from '../../models/historial.model';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Observable } from 'rxjs';
 import { MatNativeDateModule, MatOption, MatOptionModule, NativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker'
-import { FormDialogComponent } from '../shared/form-dialog/form-dialog.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Usuario } from '../../models/usuarios.model';
 import { UsuariosService } from '../../services/usuarios-services/usuarios.service.service';
-import { HerramientaServiceService } from '../../services/herramientas-services/herramienta.service.service';
+import { HerramientasService } from '../../services/herramientas-services/herramienta.service.service';
 import { InstalacionesServiceService } from '../../services/instalaciones-services/instalaciones.service.service';
 import { ReservasService } from '../../services/reservas-services/reservas.service.service';
 @Component({
@@ -55,14 +53,17 @@ export class HistorialComponent implements OnInit, AfterViewInit{
   notificationEli: { message: string; type: 'info' | 'success' | 'error' | 'warning'  } = {
     message: '',type: 'info'
   };
-  
+  tipos = [
+    { value: 'Instalacion', label: 'Instalacion' },
+    { value: 'Herramienta', label: 'Herramienta' }
+  ];
   dataSource=new MatTableDataSource<Reserva>();
   dataHistorial=new MatTableDataSource<Historial>();
   formulario!:FormGroup;
   @ViewChild(MatPaginator) paginator!:MatPaginator;
   @ViewChild('paginatorHistorial') paginatorHistorial!: MatPaginator;
   constructor(private reservaService:ReservasService,private mydialog:MatDialog,
-    private historialService:HistorialServiceService,private fb:FormBuilder,private usuarioService:UsuariosService,private serviceHerra:HerramientaServiceService,
+    private historialService:HistorialServiceService,private fb:FormBuilder,private usuarioService:UsuariosService,private serviceHerra:HerramientasService,
     private serviceInstala:InstalacionesServiceService,
   ){}
   ngOnInit(): void {
@@ -70,7 +71,7 @@ export class HistorialComponent implements OnInit, AfterViewInit{
       this.verHistorial();
       this.formulario = this.fb.group({
         usuario: ['',], 
-        tipo: ['',],    
+        tipo: ['',[Validators.required]],    
         descripcion: ['',], 
         fechaInicio: [null,],
         fechaFin: [null,],   
@@ -151,19 +152,16 @@ export class HistorialComponent implements OnInit, AfterViewInit{
       this.usuariosFiltrados = usuarios;
     });
   }
-  tipos = [
-    { value: 'Instalacion', label: 'Instalación' },{ value: 'Herramienta', label: 'Herramienta' }
-  ];
   tipoSeleccionado: string='';
   nombres: string[] = [];
   obtener(tipo:string):void{
     this.tipoSeleccionado = tipo;
-    if(tipo=='Instalacion'){
-      this.serviceInstala.getNombresInst().subscribe(nombres=>{
+    if(tipo=='I'){
+      this.serviceInstala.getNombres().subscribe(nombres=>{
         this.nombres = nombres;
       })
-    }else if(tipo=='Herramienta'){
-      this.serviceHerra.getNombresHerra().subscribe(nombres=>{
+    }else if(tipo=='H'){
+      this.serviceHerra.getNombres().subscribe(nombres=>{
         this.nombres=nombres;
       })
     }
@@ -181,7 +179,8 @@ export class HistorialComponent implements OnInit, AfterViewInit{
         // Maneja los resultados
         this.dataHistorial.data=datos;
       });
+    }else{
+      this.verHistorial();
     }
   }
-  
 } 

@@ -3,7 +3,7 @@ import { InicioServiciosComponent } from './components/inicio-servicios/inicio-s
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { InstalacionesComponent } from './components/instalaciones/instalaciones.component';
-import { HerramientaServiceService } from './services/herramientas-services/herramienta.service.service';
+import { HerramientasService } from './services/herramientas-services/herramienta.service.service';
 import { HerramientasComponent } from './components/herramientas/herramientas.component';
 import { ReservasComponent } from './components/reservas/reservas.component';
 import { HistorialComponent } from './components/historial/historial.component';
