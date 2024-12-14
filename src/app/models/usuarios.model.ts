@@ -1,4 +1,4 @@
-export interface Usuario {
+export interface Usuario{
   //4 campos, tres tipos diferentes
     id: number; //Numero
     nombre: string;  //un nombre
